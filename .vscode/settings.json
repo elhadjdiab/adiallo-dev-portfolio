@@ -1,0 +1,5 @@
+{
+  "prisma.pinToPrisma6": true,
+  "prisma.schemaPath": "src/config/schema.prisma",
+  "postman.settings.dotenv-detection-notification-visibility": false
+}
