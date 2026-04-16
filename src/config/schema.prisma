@@ -8,27 +8,45 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  password  String
-  name      String?
-  projects  Project[]
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  password     String
+  name         String?
+  createdAt    DateTime      @default(now())
+  testimonials Testimonial[]
 }
 
 model Project {
-  id          Int     @id @default(autoincrement())
-  title       String
-  description String
-  techStack   String
-  imageUrl    String?
-  userId      Int
-  user        User    @relation(fields: [userId], references: [id])
+  id           Int                  @id @default(autoincrement())
+  title        String
+  description  String
+  imageUrl     String?
+  githubUrl    String?
+  liveUrl      String?
+  createdAt    DateTime             @default(now())
+  technologies ProjectTechnology[]
+}
+
+model Technology {
+  id       Int                  @id @default(autoincrement())
+  name     String               @unique
+  projects ProjectTechnology[]
+}
+
+model ProjectTechnology {
+  projectId    Int
+  technologyId Int
+  project      Project    @relation(fields: [projectId], references: [id])
+  technology   Technology @relation(fields: [technologyId], references: [id])
+
+  @@id([projectId, technologyId])
 }
 
 model Testimonial {
   id        Int      @id @default(autoincrement())
-  author    String
   content   String
-  approved  Boolean  @default(false)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }
