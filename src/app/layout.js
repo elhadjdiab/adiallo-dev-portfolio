@@ -7,6 +7,7 @@ import { store } from "@/store";
 import SiteNav from "@/components/SiteNav";
 import MainShell from "@/components/MainShell";
 import AuthHydrate from "@/components/AuthHydrate";
+import { ToastProvider } from "@/components/ui/Toast";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,10 +23,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={`${inter.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#0B0F14] font-sans text-slate-100">
-        <SiteNav />
         <Provider store={store}>
-          <AuthHydrate />
-          <MainShell>{children}</MainShell>
+          <ToastProvider>
+            <SiteNav />
+            <AuthHydrate />
+            <MainShell>{children}</MainShell>
+          </ToastProvider>
         </Provider>
       </body>
     </html>

@@ -9,6 +9,7 @@ import Container from "@/components/ui/Container";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+import { useToast } from "@/components/ui/Toast";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -19,6 +20,7 @@ const fadeIn = {
 export default function AdminTestimonialsPage() {
   const router = useRouter();
   const { isAuthenticated } = useSelector((s) => s.auth);
+  const { toast } = useToast();
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
@@ -68,14 +70,15 @@ export default function AdminTestimonialsPage() {
             t.id === id ? { ...t, status: newStatus } : t
           )
         );
+        toast.success(`Témoignage ${newStatus === "approved" ? "approuvé" : "rejeté"}`);
       } else {
         const errorData = await res.json();
         console.error("Error response:", errorData);
-        alert(`Erreur lors de la modification du status: ${errorData.error || "Erreur inconnue"}`);
+        toast.error(errorData.error || "Erreur lors de la modification du statut");
       }
     } catch (error) {
       console.error("Erreur status change:", error);
-      alert(`Erreur réseau: ${error.message}`);
+      toast.error("Erreur réseau");
     } finally {
       setProcessing(null);
     }
@@ -96,12 +99,13 @@ export default function AdminTestimonialsPage() {
 
       if (res.ok) {
         setTestimonials(testimonials.filter((t) => t.id !== id));
+        toast.success("Témoignage supprimé");
       } else {
-        alert("Erreur lors de la suppression");
+        toast.error("Erreur lors de la suppression");
       }
     } catch (error) {
       console.error("Erreur delete:", error);
-      alert("Erreur réseau");
+      toast.error("Erreur réseau");
     } finally {
       setProcessing(null);
     }

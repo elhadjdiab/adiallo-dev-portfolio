@@ -9,6 +9,7 @@ import Container from "@/components/ui/Container";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+import { useToast } from "@/components/ui/Toast";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -19,6 +20,7 @@ const fadeIn = {
 export default function AdminProjectsPage() {
   const router = useRouter();
   const { isAuthenticated } = useSelector((s) => s.auth);
+  const { toast } = useToast();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(null);
@@ -60,12 +62,13 @@ export default function AdminProjectsPage() {
 
       if (res.ok) {
         setProjects(projects.filter((p) => p.id !== id));
+        toast.success("Projet supprimé");
       } else {
-        alert("Erreur lors de la suppression");
+        toast.error("Erreur lors de la suppression");
       }
     } catch (error) {
       console.error("Erreur delete:", error);
-      alert("Erreur réseau");
+      toast.error("Erreur réseau");
     } finally {
       setDeleting(null);
     }
