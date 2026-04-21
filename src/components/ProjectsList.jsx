@@ -107,14 +107,16 @@ function ProjectsGrid({ projects }) {
                     Code
                   </a>
                 )}
-                <a
+                <Button
                   href={`/projects/${project.id}/testimonial`}
+                  variant="ghost"
+                  size="sm"
                   aria-label={`Laisser un témoignage pour ${project.title}`}
-                  className="inline-flex items-center gap-2 rounded-lg border border-indigo-600/50 bg-indigo-600/10 px-3 py-2 text-xs text-indigo-400 transition-all duration-200 hover:border-indigo-500 hover:bg-indigo-600/20"
+                  className="inline-flex items-center gap-2 rounded-lg border border-indigo-600/50 bg-indigo-600/10 px-3 py-1.5 text-xs text-indigo-400 transition-all duration-200 hover:border-indigo-500 hover:bg-indigo-600/20"
                 >
                   <MessageSquare size={12} />
                   Témoigner
-                </a>
+                </Button>
               </div>
             </div>
           </Card>

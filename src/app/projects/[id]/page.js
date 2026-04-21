@@ -230,12 +230,12 @@ export default function ProjectDetailPage() {
             <Card hover={false} className="text-center text-slate-400">
               <p className="mb-4">Aucun témoignage pour ce projet.</p>
               {!isAuthenticated && (
-                <p className="text-sm text-slate-500">
-                  <a href="/login" className="text-indigo-400 hover:text-indigo-300">
-                    Connectez-vous
-                  </a>{" "}
-                  pour laisser le premier témoignage
-                </p>
+                <div className="text-sm text-slate-500">
+                  <Button href="/login" variant="secondary" size="sm">
+                    Se connecter
+                  </Button>
+                  <span className="mx-2">pour laisser le premier témoignage</span>
+                </div>
               )}
             </Card>
           ) : (

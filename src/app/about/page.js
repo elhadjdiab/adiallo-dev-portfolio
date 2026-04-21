@@ -17,22 +17,22 @@ const skills = [
   {
     category: "Frontend",
     icon: Code,
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux"],
+    items: ["React", "Next.js", "Tailwind CSS", "Redux"],
   },
   {
     category: "Backend",
     icon: Server,
-    items: ["Node.js", "Express", "REST API", "GraphQL", "JWT"],
+    items: ["Node.js", "Express", "REST API", "JWT"],
   },
   {
     category: "Database",
     icon: Database,
-    items: ["PostgreSQL", "MongoDB", "Prisma", "SQLite"],
+    items: ["PostgreSQL", "MongoDB", "Prisma", "SQLite", "SQLServer"],
   },
   {
     category: "Mobile",
     icon: Smartphone,
-    items: ["React Native", "Expo", "Mobile-First Design"],
+    items: ["React Native", "Expo", "Mobile-First Design", "SwiftUI"],
   },
 ];
 
@@ -66,7 +66,7 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-4 text-slate-400">
               <p>
-                Développeur Full-Stack avec une expertise en JavaScript/TypeScript, je conçois et développe 
+                Développeur Full-Stack avec une expertise en JavaScript, je conçois et développe 
                 des applications web et mobile modernes, performantes et scalables.
               </p>
               <p>
@@ -189,8 +189,6 @@ export default function AboutPage() {
                 rel="noreferrer"
                 aria-label="Voir mon profil GitHub"
               >
-                <Github size={16} />
-                GitHub
               </Button>
               <Button
                 href="https://linkedin.com/in/abdoulaye-diallo"
@@ -199,8 +197,6 @@ export default function AboutPage() {
                 rel="noreferrer"
                 aria-label="Voir mon profil LinkedIn"
               >
-                <Linkedin size={16} />
-                LinkedIn
               </Button>
             </div>
           </Card>

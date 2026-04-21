@@ -31,6 +31,10 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
 
+  // Get redirect URL from query params
+  const searchParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+  const redirectUrl = searchParams?.get("redirect") || "/admin";
+
   function validate() {
     const next = {};
     if (!name.trim() || name.trim().length < 2) next.name = "Le nom doit contenir au moins 2 caractères.";
@@ -70,7 +74,7 @@ export default function RegisterPage() {
       const { user, token } = data;
       persistAuthSession(user, token);
       dispatch(loginSuccess({ user, token }));
-      router.push("/admin");
+      router.push(redirectUrl);
     } catch {
       dispatch(loginFailure("Erreur réseau. Réessaie."));
     }
@@ -141,7 +145,10 @@ export default function RegisterPage() {
 
         <p className="mt-8 text-center text-sm text-slate-400">
           Déjà inscrit ?{" "}
-          <Link href="/login" className="font-medium text-indigo-400 hover:text-indigo-300">
+          <Link 
+            href={redirectUrl !== "/admin" ? `/login?redirect=${encodeURIComponent(redirectUrl)}` : "/login"}
+            className="font-medium text-indigo-400 hover:text-indigo-300"
+          >
             Se connecter
           </Link>
         </p>
