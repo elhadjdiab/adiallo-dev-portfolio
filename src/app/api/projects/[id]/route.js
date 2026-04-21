@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/lib/messages";
 
 function parseId(id) {
   const parsed = Number(id);
@@ -25,7 +26,7 @@ export async function GET(request, { params }) {
     const { id } = await params;
     const projectId = parseId(id);
     if (!projectId) {
-      return NextResponse.json({ error: "ID invalide." }, { status: 400 });
+      return NextResponse.json({ error: ERROR_MESSAGES.INVALID_ID }, { status: 400 });
     }
 
     const project = await prisma.project.findUnique({
@@ -40,7 +41,7 @@ export async function GET(request, { params }) {
     });
 
     if (!project) {
-      return NextResponse.json({ error: "Projet introuvable." }, { status: 404 });
+      return NextResponse.json({ error: ERROR_MESSAGES.PROJECT_NOT_FOUND }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -50,7 +51,7 @@ export async function GET(request, { params }) {
   } catch (error) {
     console.error("Error fetching project:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer le projet.", details: error.message },
+      { error: ERROR_MESSAGES.PROJECT_FETCH_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -60,13 +61,13 @@ export async function PUT(request, { params }) {
   try {
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const { id } = await params;
     const projectId = parseId(id);
     if (!projectId) {
-      return NextResponse.json({ error: "ID invalide." }, { status: 400 });
+      return NextResponse.json({ error: ERROR_MESSAGES.INVALID_ID }, { status: 400 });
     }
 
     const { title, description, imageUrl, githubUrl, liveUrl, technologies } =
@@ -74,7 +75,7 @@ export async function PUT(request, { params }) {
 
     if (!title || !description) {
       return NextResponse.json(
-        { error: "Le titre et la description sont obligatoires." },
+        { error: ERROR_MESSAGES.PROJECT_TITLE_REQUIRED },
         { status: 400 }
       );
     }
@@ -132,7 +133,7 @@ export async function PUT(request, { params }) {
   } catch (error) {
     console.error("Error updating project:", error);
     return NextResponse.json(
-      { error: "Impossible de modifier le projet.", details: error.message },
+      { error: ERROR_MESSAGES.PROJECT_UPDATE_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -142,13 +143,13 @@ export async function DELETE(request, { params }) {
   try {
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const { id } = await params;
     const projectId = parseId(id);
     if (!projectId) {
-      return NextResponse.json({ error: "ID invalide." }, { status: 400 });
+      return NextResponse.json({ error: ERROR_MESSAGES.INVALID_ID }, { status: 400 });
     }
 
     await prisma.projectTechnology.deleteMany({
@@ -159,11 +160,11 @@ export async function DELETE(request, { params }) {
       where: { id: projectId },
     });
 
-    return NextResponse.json({ message: "Projet supprime." });
+    return NextResponse.json({ message: SUCCESS_MESSAGES.PROJECT_DELETED });
   } catch (error) {
     console.error("Error deleting project:", error);
     return NextResponse.json(
-      { error: "Impossible de supprimer le projet.", details: error.message },
+      { error: ERROR_MESSAGES.PROJECT_DELETE_ERROR, details: error.message },
       { status: 500 }
     );
   }

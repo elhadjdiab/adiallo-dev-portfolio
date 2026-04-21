@@ -3,6 +3,7 @@ import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { existsSync } from "fs";
 import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/lib/messages";
 
 function getAuthUser(request) {
   const token = getTokenFromRequest(request);
@@ -15,7 +16,7 @@ export async function POST(request) {
     // Vérifier l'authentification
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const formData = await request.formData();
@@ -23,7 +24,7 @@ export async function POST(request) {
 
     if (!file) {
       return NextResponse.json(
-        { error: "Aucun fichier fourni." },
+        { error: ERROR_MESSAGES.UPLOAD_NO_FILE },
         { status: 400 }
       );
     }
@@ -32,7 +33,7 @@ export async function POST(request) {
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { error: "Type de fichier non autorisé. Utilisez JPG, PNG, WebP ou GIF." },
+        { error: ERROR_MESSAGES.UPLOAD_INVALID_TYPE },
         { status: 400 }
       );
     }
@@ -41,7 +42,7 @@ export async function POST(request) {
     const maxSize = 5 * 1024 * 1024; // 5MB
     if (file.size > maxSize) {
       return NextResponse.json(
-        { error: "Fichier trop volumineux. Maximum 5MB." },
+        { error: ERROR_MESSAGES.UPLOAD_FILE_TOO_LARGE },
         { status: 400 }
       );
     }
@@ -74,7 +75,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Error uploading file:", error);
     return NextResponse.json(
-      { error: "Erreur lors de l'upload.", details: error.message },
+      { error: ERROR_MESSAGES.UPLOAD_ERROR, details: error.message },
       { status: 500 }
     );
   }

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { ERROR_MESSAGES } from "@/lib/messages";
 
 function getAuthUser(request) {
   const token = getTokenFromRequest(request);
@@ -35,8 +36,9 @@ export async function GET() {
 
     return NextResponse.json(formatted);
   } catch (error) {
+    console.error("Error fetching projects:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer les projets." },
+      { error: ERROR_MESSAGES.PROJECTS_FETCH_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -44,16 +46,10 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    // Debug: vérifier les headers
-    const authHeader = request.headers.get('authorization');
-    console.log("Auth header reçu:", authHeader ? "Présent" : "Absent");
-    console.log("Auth header value:", authHeader?.substring(0, 30) + "...");
-    
     const authUser = getAuthUser(request);
-    console.log("Auth user:", authUser ? "Authentifié" : "Non authentifié");
     
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const { title, description, imageUrl, githubUrl, liveUrl, technologies } =
@@ -61,7 +57,7 @@ export async function POST(request) {
 
     if (!title || !description) {
       return NextResponse.json(
-        { error: "Le titre et la description sont obligatoires." },
+        { error: ERROR_MESSAGES.PROJECT_TITLE_REQUIRED },
         { status: 400 }
       );
     }
@@ -103,8 +99,9 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
+    console.error("Error creating project:", error);
     return NextResponse.json(
-      { error: "Impossible de creer le projet." },
+      { error: ERROR_MESSAGES.PROJECT_CREATE_ERROR, details: error.message },
       { status: 500 }
     );
   }

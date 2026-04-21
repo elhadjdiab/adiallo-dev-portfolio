@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { ERROR_MESSAGES } from "@/lib/messages";
 
 function getAuthUser(request) {
   const token = getTokenFromRequest(request);
@@ -13,7 +14,7 @@ export async function GET(request) {
     // Vérifier que l'utilisateur est authentifié (admin)
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     // Retourner tous les témoignages (tous status)
@@ -33,7 +34,7 @@ export async function GET(request) {
   } catch (error) {
     console.error("Error fetching all testimonials:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer les temoignages.", details: error.message },
+      { error: ERROR_MESSAGES.TESTIMONIALS_FETCH_ERROR, details: error.message },
       { status: 500 }
     );
   }

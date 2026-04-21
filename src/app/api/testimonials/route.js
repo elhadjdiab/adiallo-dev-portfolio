@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { ERROR_MESSAGES } from "@/lib/messages";
 
 function getAuthUser(request) {
   const token = getTokenFromRequest(request);
@@ -30,7 +31,7 @@ export async function GET() {
   } catch (error) {
     console.error("Error fetching testimonials:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer les temoignages.", details: error.message },
+      { error: ERROR_MESSAGES.TESTIMONIALS_FETCH_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -40,35 +41,35 @@ export async function POST(request) {
   try {
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const { content, projectId } = await request.json();
     
     if (!content || !content.trim()) {
       return NextResponse.json(
-        { error: "Le contenu du temoignage est obligatoire." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_CONTENT_REQUIRED },
         { status: 400 }
       );
     }
 
     if (!projectId) {
       return NextResponse.json(
-        { error: "Le projet est obligatoire." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_PROJECT_REQUIRED },
         { status: 400 }
       );
     }
 
     if (content.trim().length < 20) {
       return NextResponse.json(
-        { error: "Le temoignage doit contenir au moins 20 caracteres." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_MIN_LENGTH },
         { status: 400 }
       );
     }
 
     if (content.trim().length > 500) {
       return NextResponse.json(
-        { error: "Le temoignage ne peut pas depasser 500 caracteres." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_MAX_LENGTH },
         { status: 400 }
       );
     }
@@ -94,7 +95,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Error creating testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de creer le temoignage.", details: error.message },
+      { error: ERROR_MESSAGES.TESTIMONIAL_CREATE_ERROR, details: error.message },
       { status: 500 }
     );
   }

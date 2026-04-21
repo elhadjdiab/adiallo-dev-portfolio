@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/lib/messages";
 
 function getAuthUser(request) {
   const token = getTokenFromRequest(request);
@@ -23,7 +24,7 @@ export async function GET(request, { params }) {
 
     if (!testimonial) {
       return NextResponse.json(
-        { error: "Temoignage non trouve." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_NOT_FOUND },
         { status: 404 }
       );
     }
@@ -32,7 +33,7 @@ export async function GET(request, { params }) {
   } catch (error) {
     console.error("Error fetching testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer le temoignage.", details: error.message },
+      { error: ERROR_MESSAGES.TESTIMONIAL_FETCH_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -43,7 +44,7 @@ export async function PATCH(request, { params }) {
   try {
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const { id } = await params;
@@ -51,7 +52,7 @@ export async function PATCH(request, { params }) {
 
     if (!["pending", "approved", "rejected"].includes(status)) {
       return NextResponse.json(
-        { error: "Status invalide. Doit etre: pending, approved ou rejected." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_STATUS_INVALID },
         { status: 400 }
       );
     }
@@ -70,7 +71,7 @@ export async function PATCH(request, { params }) {
   } catch (error) {
     console.error("Error updating testimonial status:", error);
     return NextResponse.json(
-      { error: "Impossible de modifier le status.", details: error.message },
+      { error: ERROR_MESSAGES.TESTIMONIAL_STATUS_UPDATE_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -81,7 +82,7 @@ export async function PUT(request, { params }) {
   try {
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const { id } = await params;
@@ -89,21 +90,21 @@ export async function PUT(request, { params }) {
 
     if (!content || !content.trim()) {
       return NextResponse.json(
-        { error: "Le contenu est obligatoire." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_CONTENT_REQUIRED },
         { status: 400 }
       );
     }
 
     if (content.trim().length < 20) {
       return NextResponse.json(
-        { error: "Le temoignage doit contenir au moins 20 caracteres." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_MIN_LENGTH },
         { status: 400 }
       );
     }
 
     if (content.trim().length > 500) {
       return NextResponse.json(
-        { error: "Le temoignage ne peut pas depasser 500 caracteres." },
+        { error: ERROR_MESSAGES.TESTIMONIAL_MAX_LENGTH },
         { status: 400 }
       );
     }
@@ -131,7 +132,7 @@ export async function PUT(request, { params }) {
   } catch (error) {
     console.error("Error updating testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de modifier le temoignage.", details: error.message },
+      { error: ERROR_MESSAGES.TESTIMONIAL_UPDATE_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -142,7 +143,7 @@ export async function DELETE(request, { params }) {
   try {
     const authUser = getAuthUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
 
     const { id } = await params;
@@ -150,11 +151,11 @@ export async function DELETE(request, { params }) {
       where: { id: parseInt(id) },
     });
 
-    return NextResponse.json({ message: "Temoignage supprime avec succes." });
+    return NextResponse.json({ message: SUCCESS_MESSAGES.TESTIMONIAL_DELETED });
   } catch (error) {
     console.error("Error deleting testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de supprimer le temoignage.", details: error.message },
+      { error: ERROR_MESSAGES.TESTIMONIAL_DELETE_ERROR, details: error.message },
       { status: 500 }
     );
   }
