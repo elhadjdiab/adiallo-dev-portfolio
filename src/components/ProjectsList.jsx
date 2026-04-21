@@ -7,88 +7,88 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import TerminalBadge from "@/components/TerminalBadge";
 import ProjectsGridSkeleton from "@/components/ProjectsGridSkeleton";
+import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
+import Badge from "@/components/ui/Badge";
 import { projectTerminalLabel } from "@/lib/projectMeta";
 
-const cardInlay =
-  "rounded-2xl border border-white/[0.06] bg-slate-950/50 p-8 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),inset_0_-2px_12px_0_rgba(0,0,0,0.5)] backdrop-blur-sm transition-[box-shadow,transform] duration-300 hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.07),inset_0_1px_0_0_rgba(255,255,255,0.06)] sm:p-10";
-
-const slideUp = {
-  initial: { opacity: 0, y: 24 },
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-8% 0px" },
-  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  viewport: { once: true },
+  transition: { duration: 0.4, ease: "easeOut" },
 };
-
-const iconProps = { size: 15, strokeWidth: 1.5, className: "shrink-0 text-slate-400" };
 
 function ProjectsGrid({ projects }) {
   if (!projects.length) {
     return (
-      <motion.div {...slideUp} className={`${cardInlay} text-center text-slate-400`}>
-        Aucun projet en base pour le moment.
+      <motion.div {...fadeIn}>
+        <Card className="text-center text-slate-400">
+          Aucun projet en base pour le moment.
+        </Card>
       </motion.div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
       {projects.map((project, index) => (
         <motion.article
           key={project.id}
-          initial={{ opacity: 0, y: 26 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-8% 0px" }}
+          viewport={{ once: true }}
           transition={{
-            duration: 0.55,
-            delay: index * 0.06,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.4,
+            delay: index * 0.05,
+            ease: "easeOut",
           }}
-          className={`group ${cardInlay}`}
         >
-          <TerminalBadge label={projectTerminalLabel(project)} />
+          <Card className="h-full flex flex-col">
+            <TerminalBadge label={projectTerminalLabel(project)} />
 
-          <h2 className="mb-3 text-xl font-semibold tracking-tight text-slate-100 sm:text-2xl">
-            {project.title}
-          </h2>
-          <p className="mb-6 text-sm leading-relaxed text-slate-300 sm:text-base">{project.description}</p>
+            <h2 className="mb-3 text-xl font-semibold text-slate-100">
+              {project.title}
+            </h2>
+            <p className="mb-4 flex-1 text-sm leading-relaxed text-slate-400">
+              {project.description}
+            </p>
 
-          {project.technologies?.length > 0 && (
-            <div className="mb-6 flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-md border border-white/[0.06] bg-black/25 px-2.5 py-1 text-xs text-slate-400 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]"
+            {project.technologies?.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <Badge key={tech} variant="default">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            )}
+
+            <div className="flex flex-wrap gap-3">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50"
                 >
-                  {tech}
-                </span>
-              ))}
+                  <ExternalLink size={14} />
+                  Démo
+                </a>
+              )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50"
+                >
+                  <Github size={14} />
+                  Code
+                </a>
+              )}
             </div>
-          )}
-
-          <div className="flex flex-wrap gap-3 text-sm">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-subtle inline-flex items-center gap-2 rounded-lg px-4 py-2 text-slate-200 transition-transform duration-150 active:scale-95"
-              >
-                <ExternalLink {...iconProps} />
-                Démo
-              </a>
-            )}
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-subtle inline-flex items-center gap-2 rounded-lg px-4 py-2 text-slate-200 transition-transform duration-150 active:scale-95"
-              >
-                <Github {...iconProps} />
-                Code
-              </a>
-            )}
-          </div>
+          </Card>
         </motion.article>
       ))}
     </div>
@@ -109,11 +109,10 @@ export default function ProjectsList() {
 
   if (error) {
     return (
-      <motion.div
-        {...slideUp}
-        className="rounded-2xl border border-red-500/25 bg-red-500/10 p-6 text-sm text-red-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] backdrop-blur-md"
-      >
-        Erreur : {error}
+      <motion.div {...fadeIn}>
+        <Card className="border-red-500/25 bg-red-500/10 text-red-200">
+          <p className="text-sm">Erreur : {error}</p>
+        </Card>
       </motion.div>
     );
   }
