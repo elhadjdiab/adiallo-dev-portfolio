@@ -75,9 +75,15 @@ export default function NewProjectPage() {
     setSubmitting(true);
 
     try {
+      // Récupérer le token depuis localStorage
+      const token = localStorage.getItem("token");
+      
       const res = await fetch("/api/projects", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          ...(token && { "Authorization": `Bearer ${token}` })
+        },
         body: JSON.stringify({
           title: form.title.trim(),
           description: form.description.trim(),
