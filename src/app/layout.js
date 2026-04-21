@@ -21,8 +21,7 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={`${inter.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#030712] font-sans text-slate-100">
-        <div className="mesh-background" aria-hidden />
+      <body className="min-h-full flex flex-col bg-[#0B0F14] font-sans text-slate-100">
         <SiteNav />
         <Provider store={store}>
           <AuthHydrate />

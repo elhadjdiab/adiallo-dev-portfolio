@@ -1,69 +1,57 @@
 @import "tailwindcss";
 
+/* ============================================
+   DESIGN SYSTEM - Minimaliste Futuriste Pro
+   ============================================ */
+
 :root {
-  --background: #030712;
-  --foreground: #e2e8f0;
+  /* Backgrounds */
+  --bg-primary: #0B0F14;
+  --bg-surface: #111827;
+  --bg-surface-hover: #0F172A;
+  
+  /* Colors */
+  --primary: #6366F1;
+  --primary-hover: #4F46E5;
+  --accent: #22C55E;
+  --error: #EF4444;
+  
+  /* Text */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  
+  /* Borders */
+  --border: #1E293B;
+  --border-hover: #334155;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-surface-hover: var(--bg-surface-hover);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-error: var(--error);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #030712;
-    --foreground: #e2e8f0;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-.mesh-background {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-color: #030712;
-  background-image:
-    radial-gradient(
-      circle 55vw at 12% 12%,
-      rgba(59, 130, 246, 0.1) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      circle 60vw at 88% 78%,
-      rgba(99, 102, 241, 0.1) 0%,
-      transparent 55%
-    );
-  filter: blur(0px);
-}
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
 
-.btn-subtle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgb(30 41 59 / 0.5);
-  background: rgb(15 23 42 / 0.35);
-  color: rgb(241 245 249);
-  transition:
-    border-color 0.35s ease,
-    background-color 0.35s ease,
-    color 0.35s ease,
-    transform 0.15s ease;
-}
-
-.btn-subtle:hover {
-  border-color: rgb(148 163 184 / 0.35);
-  background: rgb(15 23 42 / 0.55);
-}
-
-.btn-subtle:active {
-  transform: scale(0.96);
-}
+/* Removed: .mesh-background - too heavy */
+/* Removed: .btn-subtle - replaced by component system */
