@@ -22,7 +22,8 @@ function normalizeTechnologies(technologies) {
 
 export async function GET(request, { params }) {
   try {
-    const projectId = parseId(params.id);
+    const { id } = await params;
+    const projectId = parseId(id);
     if (!projectId) {
       return NextResponse.json({ error: "ID invalide." }, { status: 400 });
     }
@@ -47,8 +48,9 @@ export async function GET(request, { params }) {
       technologies: project.technologies.map((item) => item.technology.name),
     });
   } catch (error) {
+    console.error("Error fetching project:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer le projet." },
+      { error: "Impossible de recuperer le projet.", details: error.message },
       { status: 500 }
     );
   }
@@ -61,7 +63,8 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
-    const projectId = parseId(params.id);
+    const { id } = await params;
+    const projectId = parseId(id);
     if (!projectId) {
       return NextResponse.json({ error: "ID invalide." }, { status: 400 });
     }
@@ -127,8 +130,9 @@ export async function PUT(request, { params }) {
       technologies: updated.technologies.map((item) => item.technology.name),
     });
   } catch (error) {
+    console.error("Error updating project:", error);
     return NextResponse.json(
-      { error: "Impossible de modifier le projet." },
+      { error: "Impossible de modifier le projet.", details: error.message },
       { status: 500 }
     );
   }
@@ -141,7 +145,8 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
-    const projectId = parseId(params.id);
+    const { id } = await params;
+    const projectId = parseId(id);
     if (!projectId) {
       return NextResponse.json({ error: "ID invalide." }, { status: 400 });
     }
@@ -156,8 +161,9 @@ export async function DELETE(request, { params }) {
 
     return NextResponse.json({ message: "Projet supprime." });
   } catch (error) {
+    console.error("Error deleting project:", error);
     return NextResponse.json(
-      { error: "Impossible de supprimer le projet." },
+      { error: "Impossible de supprimer le projet.", details: error.message },
       { status: 500 }
     );
   }

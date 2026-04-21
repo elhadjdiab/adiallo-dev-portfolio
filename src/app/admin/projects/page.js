@@ -134,77 +134,91 @@ export default function AdminProjectsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
               >
-                <Card>
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div className="flex-1">
-                      <div className="mb-2 flex items-center gap-2">
-                        <Badge variant="default">#{project.id}</Badge>
-                        <h2 className="text-xl font-semibold text-slate-100">
-                          {project.title}
-                        </h2>
+                <Card className="overflow-hidden p-0">
+                  <div className="flex flex-col gap-4 sm:flex-row">
+                    {/* Image */}
+                    {project.imageUrl && (
+                      <div className="h-48 w-full overflow-hidden bg-slate-900 sm:h-auto sm:w-48">
+                        <img
+                          src={project.imageUrl}
+                          alt={project.title}
+                          className="h-full w-full object-cover"
+                        />
                       </div>
-                      <p className="mb-3 text-sm text-slate-400">
-                        {project.description}
-                      </p>
+                    )}
 
-                      {/* Technologies */}
-                      {project.technologies?.length > 0 && (
-                        <div className="mb-3 flex flex-wrap gap-2">
-                          {project.technologies.map((tech) => (
-                            <Badge key={tech} variant="default" className="text-xs">
-                              {tech}
-                            </Badge>
-                          ))}
+                    {/* Contenu */}
+                    <div className="flex flex-1 flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="flex-1">
+                        <div className="mb-2 flex items-center gap-2">
+                          <Badge variant="default">#{project.id}</Badge>
+                          <h2 className="text-xl font-semibold text-slate-100">
+                            {project.title}
+                          </h2>
                         </div>
-                      )}
+                        <p className="mb-3 text-sm text-slate-400">
+                          {project.description}
+                        </p>
 
-                      {/* Links */}
-                      <div className="flex flex-wrap gap-2 text-xs text-slate-500">
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-1 hover:text-slate-300"
-                          >
-                            <ExternalLink size={12} />
-                            Démo
-                          </a>
+                        {/* Technologies */}
+                        {project.technologies?.length > 0 && (
+                          <div className="mb-3 flex flex-wrap gap-2">
+                            {project.technologies.map((tech) => (
+                              <Badge key={tech} variant="default" className="text-xs">
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
                         )}
-                        {project.githubUrl && (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-1 hover:text-slate-300"
-                          >
-                            <Github size={12} />
-                            Code
-                          </a>
-                        )}
+
+                        {/* Links */}
+                        <div className="flex flex-wrap gap-2 text-xs text-slate-500">
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="flex items-center gap-1 hover:text-slate-300"
+                            >
+                              <ExternalLink size={12} />
+                              Démo
+                            </a>
+                          )}
+                          {project.githubUrl && (
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="flex items-center gap-1 hover:text-slate-300"
+                            >
+                              <Github size={12} />
+                              Code
+                            </a>
+                          )}
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Actions */}
-                    <div className="flex gap-2">
-                      <Button
-                        href={`/admin/projects/${project.id}/edit`}
-                        variant="secondary"
-                        size="sm"
-                      >
-                        <Edit size={14} />
-                        Modifier
-                      </Button>
-                      <Button
-                        onClick={() => handleDelete(project.id)}
-                        variant="ghost"
-                        size="sm"
-                        disabled={deleting === project.id}
-                        className="text-red-400 hover:text-red-300"
-                      >
-                        <Trash2 size={14} />
-                        {deleting === project.id ? "..." : "Supprimer"}
-                      </Button>
+                      {/* Actions */}
+                      <div className="flex gap-2">
+                        <Button
+                          href={`/admin/projects/${project.id}/edit`}
+                          variant="secondary"
+                          size="sm"
+                        >
+                          <Edit size={14} />
+                          Modifier
+                        </Button>
+                        <Button
+                          onClick={() => handleDelete(project.id)}
+                          variant="ghost"
+                          size="sm"
+                          disabled={deleting === project.id}
+                          className="text-red-400 hover:text-red-300"
+                        >
+                          <Trash2 size={14} />
+                          {deleting === project.id ? "..." : "Supprimer"}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Card>

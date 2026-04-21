@@ -32,7 +32,7 @@ const adminSections = [
     description: "Modérer et gérer les témoignages",
     icon: MessageSquare,
     href: "/admin/testimonials",
-    badge: "À venir",
+    badge: null,
   },
   {
     id: "messages",

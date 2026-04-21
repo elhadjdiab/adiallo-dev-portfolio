@@ -19,14 +19,18 @@ export async function GET() {
         user: {
           select: { id: true, name: true, email: true },
         },
+        project: {
+          select: { id: true, title: true },
+        },
       },
       orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json(testimonials);
   } catch (error) {
+    console.error("Error fetching testimonials:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer les temoignages." },
+      { error: "Impossible de recuperer les temoignages.", details: error.message },
       { status: 500 }
     );
   }
@@ -39,10 +43,18 @@ export async function POST(request) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
-    const { content } = await request.json();
+    const { content, projectId } = await request.json();
+    
     if (!content || !content.trim()) {
       return NextResponse.json(
         { error: "Le contenu du temoignage est obligatoire." },
+        { status: 400 }
+      );
+    }
+
+    if (!projectId) {
+      return NextResponse.json(
+        { error: "Le projet est obligatoire." },
         { status: 400 }
       );
     }
@@ -66,18 +78,23 @@ export async function POST(request) {
         content: content.trim(),
         status: "pending", // Par défaut en attente de modération
         userId: authUser.id,
+        projectId: parseInt(projectId),
       },
       include: {
         user: {
           select: { id: true, name: true, email: true },
+        },
+        project: {
+          select: { id: true, title: true },
         },
       },
     });
 
     return NextResponse.json(testimonial, { status: 201 });
   } catch (error) {
+    console.error("Error creating testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de creer le temoignage." },
+      { error: "Impossible de creer le temoignage.", details: error.message },
       { status: 500 }
     );
   }

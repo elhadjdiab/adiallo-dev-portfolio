@@ -152,7 +152,8 @@ exports.Prisma.TestimonialScalarFieldEnum = {
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  projectId: 'projectId'
 };
 
 exports.Prisma.ContactMessageScalarFieldEnum = {

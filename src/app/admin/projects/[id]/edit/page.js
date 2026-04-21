@@ -11,6 +11,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Textarea from "@/components/ui/Textarea";
 import Badge from "@/components/ui/Badge";
+import ImageUpload from "@/components/ImageUpload";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -209,12 +210,10 @@ export default function EditProjectPage() {
                 required
               />
 
-              <Input
-                label="URL de l'image (optionnel)"
-                name="imageUrl"
+              <ImageUpload
                 value={form.imageUrl}
-                onChange={handleChange}
-                placeholder="https://example.com/image.jpg"
+                onChange={(url) => setForm((prev) => ({ ...prev, imageUrl: url }))}
+                label="Image du projet"
               />
 
               <Input

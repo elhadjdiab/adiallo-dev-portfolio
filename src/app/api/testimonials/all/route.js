@@ -22,14 +22,18 @@ export async function GET(request) {
         user: {
           select: { id: true, name: true, email: true },
         },
+        project: {
+          select: { id: true, title: true },
+        },
       },
       orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json(testimonials);
   } catch (error) {
+    console.error("Error fetching all testimonials:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer les temoignages." },
+      { error: "Impossible de recuperer les temoignages.", details: error.message },
       { status: 500 }
     );
   }

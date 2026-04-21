@@ -11,8 +11,9 @@ function getAuthUser(request) {
 // GET - Récupérer un témoignage spécifique
 export async function GET(request, { params }) {
   try {
+    const { id } = await params;
     const testimonial = await prisma.testimonial.findUnique({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       include: {
         user: {
           select: { id: true, name: true, email: true },
@@ -29,8 +30,9 @@ export async function GET(request, { params }) {
 
     return NextResponse.json(testimonial);
   } catch (error) {
+    console.error("Error fetching testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer le temoignage." },
+      { error: "Impossible de recuperer le temoignage.", details: error.message },
       { status: 500 }
     );
   }
@@ -44,6 +46,7 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
+    const { id } = await params;
     const { status } = await request.json();
 
     if (!["pending", "approved", "rejected"].includes(status)) {
@@ -54,7 +57,7 @@ export async function PATCH(request, { params }) {
     }
 
     const testimonial = await prisma.testimonial.update({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       data: { status },
       include: {
         user: {
@@ -65,8 +68,9 @@ export async function PATCH(request, { params }) {
 
     return NextResponse.json(testimonial);
   } catch (error) {
+    console.error("Error updating testimonial status:", error);
     return NextResponse.json(
-      { error: "Impossible de modifier le status." },
+      { error: "Impossible de modifier le status.", details: error.message },
       { status: 500 }
     );
   }
@@ -80,6 +84,7 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
+    const { id } = await params;
     const { content, status } = await request.json();
 
     if (!content || !content.trim()) {
@@ -113,7 +118,7 @@ export async function PUT(request, { params }) {
     }
 
     const testimonial = await prisma.testimonial.update({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       data: updateData,
       include: {
         user: {
@@ -124,8 +129,9 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json(testimonial);
   } catch (error) {
+    console.error("Error updating testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de modifier le temoignage." },
+      { error: "Impossible de modifier le temoignage.", details: error.message },
       { status: 500 }
     );
   }
@@ -139,14 +145,16 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
+    const { id } = await params;
     await prisma.testimonial.delete({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
     });
 
     return NextResponse.json({ message: "Temoignage supprime avec succes." });
   } catch (error) {
+    console.error("Error deleting testimonial:", error);
     return NextResponse.json(
-      { error: "Impossible de supprimer le temoignage." },
+      { error: "Impossible de supprimer le temoignage.", details: error.message },
       { status: 500 }
     );
   }

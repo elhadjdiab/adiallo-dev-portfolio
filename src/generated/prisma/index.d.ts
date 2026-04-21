@@ -1348,10 +1348,12 @@ export namespace Prisma {
 
   export type ProjectCountOutputType = {
     technologies: number
+    testimonials: number
   }
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     technologies?: boolean | ProjectCountOutputTypeCountTechnologiesArgs
+    testimonials?: boolean | ProjectCountOutputTypeCountTestimonialsArgs
   }
 
   // Custom InputTypes
@@ -1370,6 +1372,13 @@ export namespace Prisma {
    */
   export type ProjectCountOutputTypeCountTechnologiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProjectTechnologyWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountTestimonialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TestimonialWhereInput
   }
 
 
@@ -2725,6 +2734,7 @@ export namespace Prisma {
     liveUrl?: boolean
     createdAt?: boolean
     technologies?: boolean | Project$technologiesArgs<ExtArgs>
+    testimonials?: boolean | Project$testimonialsArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -2761,6 +2771,7 @@ export namespace Prisma {
   export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "imageUrl" | "githubUrl" | "liveUrl" | "createdAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     technologies?: boolean | Project$technologiesArgs<ExtArgs>
+    testimonials?: boolean | Project$testimonialsArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2770,6 +2781,7 @@ export namespace Prisma {
     name: "Project"
     objects: {
       technologies: Prisma.$ProjectTechnologyPayload<ExtArgs>[]
+      testimonials: Prisma.$TestimonialPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3174,6 +3186,7 @@ export namespace Prisma {
   export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     technologies<T extends Project$technologiesArgs<ExtArgs> = {}>(args?: Subset<T, Project$technologiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectTechnologyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    testimonials<T extends Project$testimonialsArgs<ExtArgs> = {}>(args?: Subset<T, Project$testimonialsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestimonialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3617,6 +3630,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProjectTechnologyScalarFieldEnum | ProjectTechnologyScalarFieldEnum[]
+  }
+
+  /**
+   * Project.testimonials
+   */
+  export type Project$testimonialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimonial
+     */
+    select?: TestimonialSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Testimonial
+     */
+    omit?: TestimonialOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TestimonialInclude<ExtArgs> | null
+    where?: TestimonialWhereInput
+    orderBy?: TestimonialOrderByWithRelationInput | TestimonialOrderByWithRelationInput[]
+    cursor?: TestimonialWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TestimonialScalarFieldEnum | TestimonialScalarFieldEnum[]
   }
 
   /**
@@ -5779,11 +5816,13 @@ export namespace Prisma {
   export type TestimonialAvgAggregateOutputType = {
     id: number | null
     userId: number | null
+    projectId: number | null
   }
 
   export type TestimonialSumAggregateOutputType = {
     id: number | null
     userId: number | null
+    projectId: number | null
   }
 
   export type TestimonialMinAggregateOutputType = {
@@ -5793,6 +5832,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
+    projectId: number | null
   }
 
   export type TestimonialMaxAggregateOutputType = {
@@ -5802,6 +5842,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
+    projectId: number | null
   }
 
   export type TestimonialCountAggregateOutputType = {
@@ -5811,6 +5852,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     userId: number
+    projectId: number
     _all: number
   }
 
@@ -5818,11 +5860,13 @@ export namespace Prisma {
   export type TestimonialAvgAggregateInputType = {
     id?: true
     userId?: true
+    projectId?: true
   }
 
   export type TestimonialSumAggregateInputType = {
     id?: true
     userId?: true
+    projectId?: true
   }
 
   export type TestimonialMinAggregateInputType = {
@@ -5832,6 +5876,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     userId?: true
+    projectId?: true
   }
 
   export type TestimonialMaxAggregateInputType = {
@@ -5841,6 +5886,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     userId?: true
+    projectId?: true
   }
 
   export type TestimonialCountAggregateInputType = {
@@ -5850,6 +5896,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     userId?: true
+    projectId?: true
     _all?: true
   }
 
@@ -5946,6 +5993,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     userId: number
+    projectId: number
     _count: TestimonialCountAggregateOutputType | null
     _avg: TestimonialAvgAggregateOutputType | null
     _sum: TestimonialSumAggregateOutputType | null
@@ -5974,7 +6022,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
+    projectId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testimonial"]>
 
   export type TestimonialSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5984,7 +6034,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
+    projectId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testimonial"]>
 
   export type TestimonialSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5994,7 +6046,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
+    projectId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testimonial"]>
 
   export type TestimonialSelectScalar = {
@@ -6004,23 +6058,28 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
+    projectId?: boolean
   }
 
-  export type TestimonialOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "status" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["testimonial"]>
+  export type TestimonialOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "status" | "createdAt" | "updatedAt" | "userId" | "projectId", ExtArgs["result"]["testimonial"]>
   export type TestimonialInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
   export type TestimonialIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
   export type TestimonialIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
 
   export type $TestimonialPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Testimonial"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      project: Prisma.$ProjectPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6029,6 +6088,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       userId: number
+      projectId: number
     }, ExtArgs["result"]["testimonial"]>
     composites: {}
   }
@@ -6424,6 +6484,7 @@ export namespace Prisma {
   export interface Prisma__TestimonialClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6459,6 +6520,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Testimonial", 'DateTime'>
     readonly updatedAt: FieldRef<"Testimonial", 'DateTime'>
     readonly userId: FieldRef<"Testimonial", 'Int'>
+    readonly projectId: FieldRef<"Testimonial", 'Int'>
   }
     
 
@@ -7981,7 +8043,8 @@ export namespace Prisma {
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    userId: 'userId'
+    userId: 'userId',
+    projectId: 'projectId'
   };
 
   export type TestimonialScalarFieldEnum = (typeof TestimonialScalarFieldEnum)[keyof typeof TestimonialScalarFieldEnum]
@@ -8128,6 +8191,7 @@ export namespace Prisma {
     liveUrl?: StringNullableFilter<"Project"> | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     technologies?: ProjectTechnologyListRelationFilter
+    testimonials?: TestimonialListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -8139,6 +8203,7 @@ export namespace Prisma {
     liveUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     technologies?: ProjectTechnologyOrderByRelationAggregateInput
+    testimonials?: TestimonialOrderByRelationAggregateInput
   }
 
   export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -8153,6 +8218,7 @@ export namespace Prisma {
     liveUrl?: StringNullableFilter<"Project"> | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     technologies?: ProjectTechnologyListRelationFilter
+    testimonials?: TestimonialListRelationFilter
   }, "id">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -8281,7 +8347,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeFilter<"Testimonial"> | Date | string
     userId?: IntFilter<"Testimonial"> | number
+    projectId?: IntFilter<"Testimonial"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
   }
 
   export type TestimonialOrderByWithRelationInput = {
@@ -8291,7 +8359,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    projectId?: SortOrder
     user?: UserOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
   }
 
   export type TestimonialWhereUniqueInput = Prisma.AtLeast<{
@@ -8304,7 +8374,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeFilter<"Testimonial"> | Date | string
     userId?: IntFilter<"Testimonial"> | number
+    projectId?: IntFilter<"Testimonial"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
   }, "id">
 
   export type TestimonialOrderByWithAggregationInput = {
@@ -8314,6 +8386,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    projectId?: SortOrder
     _count?: TestimonialCountOrderByAggregateInput
     _avg?: TestimonialAvgOrderByAggregateInput
     _max?: TestimonialMaxOrderByAggregateInput
@@ -8331,6 +8404,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Testimonial"> | Date | string
     userId?: IntWithAggregatesFilter<"Testimonial"> | number
+    projectId?: IntWithAggregatesFilter<"Testimonial"> | number
   }
 
   export type ContactMessageWhereInput = {
@@ -8462,6 +8536,7 @@ export namespace Prisma {
     liveUrl?: string | null
     createdAt?: Date | string
     technologies?: ProjectTechnologyCreateNestedManyWithoutProjectInput
+    testimonials?: TestimonialCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -8473,6 +8548,7 @@ export namespace Prisma {
     liveUrl?: string | null
     createdAt?: Date | string
     technologies?: ProjectTechnologyUncheckedCreateNestedManyWithoutProjectInput
+    testimonials?: TestimonialUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -8483,6 +8559,7 @@ export namespace Prisma {
     liveUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     technologies?: ProjectTechnologyUpdateManyWithoutProjectNestedInput
+    testimonials?: TestimonialUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -8494,6 +8571,7 @@ export namespace Prisma {
     liveUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     technologies?: ProjectTechnologyUncheckedUpdateManyWithoutProjectNestedInput
+    testimonials?: TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -8601,6 +8679,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTestimonialsInput
+    project: ProjectCreateNestedOneWithoutTestimonialsInput
   }
 
   export type TestimonialUncheckedCreateInput = {
@@ -8610,6 +8689,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
+    projectId: number
   }
 
   export type TestimonialUpdateInput = {
@@ -8618,6 +8698,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTestimonialsNestedInput
+    project?: ProjectUpdateOneRequiredWithoutTestimonialsNestedInput
   }
 
   export type TestimonialUncheckedUpdateInput = {
@@ -8627,6 +8708,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
+    projectId?: IntFieldUpdateOperationsInput | number
   }
 
   export type TestimonialCreateManyInput = {
@@ -8636,6 +8718,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
+    projectId: number
   }
 
   export type TestimonialUpdateManyMutationInput = {
@@ -8652,6 +8735,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
+    projectId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ContactMessageCreateInput = {
@@ -9005,11 +9089,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type TestimonialAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type TestimonialMaxOrderByAggregateInput = {
@@ -9019,6 +9105,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type TestimonialMinOrderByAggregateInput = {
@@ -9028,11 +9115,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type TestimonialSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -9155,11 +9244,25 @@ export namespace Prisma {
     connect?: ProjectTechnologyWhereUniqueInput | ProjectTechnologyWhereUniqueInput[]
   }
 
+  export type TestimonialCreateNestedManyWithoutProjectInput = {
+    create?: XOR<TestimonialCreateWithoutProjectInput, TestimonialUncheckedCreateWithoutProjectInput> | TestimonialCreateWithoutProjectInput[] | TestimonialUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: TestimonialCreateOrConnectWithoutProjectInput | TestimonialCreateOrConnectWithoutProjectInput[]
+    createMany?: TestimonialCreateManyProjectInputEnvelope
+    connect?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+  }
+
   export type ProjectTechnologyUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<ProjectTechnologyCreateWithoutProjectInput, ProjectTechnologyUncheckedCreateWithoutProjectInput> | ProjectTechnologyCreateWithoutProjectInput[] | ProjectTechnologyUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: ProjectTechnologyCreateOrConnectWithoutProjectInput | ProjectTechnologyCreateOrConnectWithoutProjectInput[]
     createMany?: ProjectTechnologyCreateManyProjectInputEnvelope
     connect?: ProjectTechnologyWhereUniqueInput | ProjectTechnologyWhereUniqueInput[]
+  }
+
+  export type TestimonialUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<TestimonialCreateWithoutProjectInput, TestimonialUncheckedCreateWithoutProjectInput> | TestimonialCreateWithoutProjectInput[] | TestimonialUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: TestimonialCreateOrConnectWithoutProjectInput | TestimonialCreateOrConnectWithoutProjectInput[]
+    createMany?: TestimonialCreateManyProjectInputEnvelope
+    connect?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
   }
 
   export type ProjectTechnologyUpdateManyWithoutProjectNestedInput = {
@@ -9176,6 +9279,20 @@ export namespace Prisma {
     deleteMany?: ProjectTechnologyScalarWhereInput | ProjectTechnologyScalarWhereInput[]
   }
 
+  export type TestimonialUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<TestimonialCreateWithoutProjectInput, TestimonialUncheckedCreateWithoutProjectInput> | TestimonialCreateWithoutProjectInput[] | TestimonialUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: TestimonialCreateOrConnectWithoutProjectInput | TestimonialCreateOrConnectWithoutProjectInput[]
+    upsert?: TestimonialUpsertWithWhereUniqueWithoutProjectInput | TestimonialUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: TestimonialCreateManyProjectInputEnvelope
+    set?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    disconnect?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    delete?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    connect?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    update?: TestimonialUpdateWithWhereUniqueWithoutProjectInput | TestimonialUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: TestimonialUpdateManyWithWhereWithoutProjectInput | TestimonialUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: TestimonialScalarWhereInput | TestimonialScalarWhereInput[]
+  }
+
   export type ProjectTechnologyUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<ProjectTechnologyCreateWithoutProjectInput, ProjectTechnologyUncheckedCreateWithoutProjectInput> | ProjectTechnologyCreateWithoutProjectInput[] | ProjectTechnologyUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: ProjectTechnologyCreateOrConnectWithoutProjectInput | ProjectTechnologyCreateOrConnectWithoutProjectInput[]
@@ -9188,6 +9305,20 @@ export namespace Prisma {
     update?: ProjectTechnologyUpdateWithWhereUniqueWithoutProjectInput | ProjectTechnologyUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: ProjectTechnologyUpdateManyWithWhereWithoutProjectInput | ProjectTechnologyUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: ProjectTechnologyScalarWhereInput | ProjectTechnologyScalarWhereInput[]
+  }
+
+  export type TestimonialUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<TestimonialCreateWithoutProjectInput, TestimonialUncheckedCreateWithoutProjectInput> | TestimonialCreateWithoutProjectInput[] | TestimonialUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: TestimonialCreateOrConnectWithoutProjectInput | TestimonialCreateOrConnectWithoutProjectInput[]
+    upsert?: TestimonialUpsertWithWhereUniqueWithoutProjectInput | TestimonialUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: TestimonialCreateManyProjectInputEnvelope
+    set?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    disconnect?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    delete?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    connect?: TestimonialWhereUniqueInput | TestimonialWhereUniqueInput[]
+    update?: TestimonialUpdateWithWhereUniqueWithoutProjectInput | TestimonialUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: TestimonialUpdateManyWithWhereWithoutProjectInput | TestimonialUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: TestimonialScalarWhereInput | TestimonialScalarWhereInput[]
   }
 
   export type ProjectTechnologyCreateNestedManyWithoutTechnologyInput = {
@@ -9266,12 +9397,26 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type ProjectCreateNestedOneWithoutTestimonialsInput = {
+    create?: XOR<ProjectCreateWithoutTestimonialsInput, ProjectUncheckedCreateWithoutTestimonialsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutTestimonialsInput
+    connect?: ProjectWhereUniqueInput
+  }
+
   export type UserUpdateOneRequiredWithoutTestimonialsNestedInput = {
     create?: XOR<UserCreateWithoutTestimonialsInput, UserUncheckedCreateWithoutTestimonialsInput>
     connectOrCreate?: UserCreateOrConnectWithoutTestimonialsInput
     upsert?: UserUpsertWithoutTestimonialsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTestimonialsInput, UserUpdateWithoutTestimonialsInput>, UserUncheckedUpdateWithoutTestimonialsInput>
+  }
+
+  export type ProjectUpdateOneRequiredWithoutTestimonialsNestedInput = {
+    create?: XOR<ProjectCreateWithoutTestimonialsInput, ProjectUncheckedCreateWithoutTestimonialsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutTestimonialsInput
+    upsert?: ProjectUpsertWithoutTestimonialsInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutTestimonialsInput, ProjectUpdateWithoutTestimonialsInput>, ProjectUncheckedUpdateWithoutTestimonialsInput>
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -9432,6 +9577,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutTestimonialsInput
   }
 
   export type TestimonialUncheckedCreateWithoutUserInput = {
@@ -9440,6 +9586,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    projectId: number
   }
 
   export type TestimonialCreateOrConnectWithoutUserInput = {
@@ -9477,6 +9624,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeFilter<"Testimonial"> | Date | string
     userId?: IntFilter<"Testimonial"> | number
+    projectId?: IntFilter<"Testimonial"> | number
   }
 
   export type ProjectTechnologyCreateWithoutProjectInput = {
@@ -9494,6 +9642,32 @@ export namespace Prisma {
 
   export type ProjectTechnologyCreateManyProjectInputEnvelope = {
     data: ProjectTechnologyCreateManyProjectInput | ProjectTechnologyCreateManyProjectInput[]
+  }
+
+  export type TestimonialCreateWithoutProjectInput = {
+    content: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutTestimonialsInput
+  }
+
+  export type TestimonialUncheckedCreateWithoutProjectInput = {
+    id?: number
+    content: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: number
+  }
+
+  export type TestimonialCreateOrConnectWithoutProjectInput = {
+    where: TestimonialWhereUniqueInput
+    create: XOR<TestimonialCreateWithoutProjectInput, TestimonialUncheckedCreateWithoutProjectInput>
+  }
+
+  export type TestimonialCreateManyProjectInputEnvelope = {
+    data: TestimonialCreateManyProjectInput | TestimonialCreateManyProjectInput[]
   }
 
   export type ProjectTechnologyUpsertWithWhereUniqueWithoutProjectInput = {
@@ -9518,6 +9692,22 @@ export namespace Prisma {
     NOT?: ProjectTechnologyScalarWhereInput | ProjectTechnologyScalarWhereInput[]
     projectId?: IntFilter<"ProjectTechnology"> | number
     technologyId?: IntFilter<"ProjectTechnology"> | number
+  }
+
+  export type TestimonialUpsertWithWhereUniqueWithoutProjectInput = {
+    where: TestimonialWhereUniqueInput
+    update: XOR<TestimonialUpdateWithoutProjectInput, TestimonialUncheckedUpdateWithoutProjectInput>
+    create: XOR<TestimonialCreateWithoutProjectInput, TestimonialUncheckedCreateWithoutProjectInput>
+  }
+
+  export type TestimonialUpdateWithWhereUniqueWithoutProjectInput = {
+    where: TestimonialWhereUniqueInput
+    data: XOR<TestimonialUpdateWithoutProjectInput, TestimonialUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type TestimonialUpdateManyWithWhereWithoutProjectInput = {
+    where: TestimonialScalarWhereInput
+    data: XOR<TestimonialUpdateManyMutationInput, TestimonialUncheckedUpdateManyWithoutProjectInput>
   }
 
   export type ProjectTechnologyCreateWithoutTechnologyInput = {
@@ -9560,6 +9750,7 @@ export namespace Prisma {
     githubUrl?: string | null
     liveUrl?: string | null
     createdAt?: Date | string
+    testimonials?: TestimonialCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutTechnologiesInput = {
@@ -9570,6 +9761,7 @@ export namespace Prisma {
     githubUrl?: string | null
     liveUrl?: string | null
     createdAt?: Date | string
+    testimonials?: TestimonialUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutTechnologiesInput = {
@@ -9609,6 +9801,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     liveUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    testimonials?: TestimonialUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutTechnologiesInput = {
@@ -9619,6 +9812,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     liveUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    testimonials?: TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type TechnologyUpsertWithoutProjectsInput = {
@@ -9661,6 +9855,32 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutTestimonialsInput, UserUncheckedCreateWithoutTestimonialsInput>
   }
 
+  export type ProjectCreateWithoutTestimonialsInput = {
+    title: string
+    description: string
+    imageUrl?: string | null
+    githubUrl?: string | null
+    liveUrl?: string | null
+    createdAt?: Date | string
+    technologies?: ProjectTechnologyCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutTestimonialsInput = {
+    id?: number
+    title: string
+    description: string
+    imageUrl?: string | null
+    githubUrl?: string | null
+    liveUrl?: string | null
+    createdAt?: Date | string
+    technologies?: ProjectTechnologyUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutTestimonialsInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutTestimonialsInput, ProjectUncheckedCreateWithoutTestimonialsInput>
+  }
+
   export type UserUpsertWithoutTestimonialsInput = {
     update: XOR<UserUpdateWithoutTestimonialsInput, UserUncheckedUpdateWithoutTestimonialsInput>
     create: XOR<UserCreateWithoutTestimonialsInput, UserUncheckedCreateWithoutTestimonialsInput>
@@ -9687,12 +9907,45 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProjectUpsertWithoutTestimonialsInput = {
+    update: XOR<ProjectUpdateWithoutTestimonialsInput, ProjectUncheckedUpdateWithoutTestimonialsInput>
+    create: XOR<ProjectCreateWithoutTestimonialsInput, ProjectUncheckedCreateWithoutTestimonialsInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutTestimonialsInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutTestimonialsInput, ProjectUncheckedUpdateWithoutTestimonialsInput>
+  }
+
+  export type ProjectUpdateWithoutTestimonialsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    liveUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    technologies?: ProjectTechnologyUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutTestimonialsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    liveUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    technologies?: ProjectTechnologyUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
   export type TestimonialCreateManyUserInput = {
     id?: number
     content: string
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    projectId: number
   }
 
   export type TestimonialUpdateWithoutUserInput = {
@@ -9700,6 +9953,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutTestimonialsNestedInput
   }
 
   export type TestimonialUncheckedUpdateWithoutUserInput = {
@@ -9708,6 +9962,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projectId?: IntFieldUpdateOperationsInput | number
   }
 
   export type TestimonialUncheckedUpdateManyWithoutUserInput = {
@@ -9716,10 +9971,20 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projectId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProjectTechnologyCreateManyProjectInput = {
     technologyId: number
+  }
+
+  export type TestimonialCreateManyProjectInput = {
+    id?: number
+    content: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: number
   }
 
   export type ProjectTechnologyUpdateWithoutProjectInput = {
@@ -9732,6 +9997,32 @@ export namespace Prisma {
 
   export type ProjectTechnologyUncheckedUpdateManyWithoutProjectInput = {
     technologyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TestimonialUpdateWithoutProjectInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutTestimonialsNestedInput
+  }
+
+  export type TestimonialUncheckedUpdateWithoutProjectInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TestimonialUncheckedUpdateManyWithoutProjectInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProjectTechnologyCreateManyTechnologyInput = {

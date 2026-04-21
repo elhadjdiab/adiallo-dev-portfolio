@@ -50,3 +50,8 @@ CLAUDE.md
 REDESIGN_PLAN.md
 DESIGN_SYSTEM.md
 PHASE_*.md
+
+# Uploads (images uploadées)
+/public/uploads/*
+!/public/uploads/.gitkeep
+!/public/uploads/projects/.gitkeep

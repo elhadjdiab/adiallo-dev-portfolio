@@ -138,4 +138,4 @@ MIT
 
 **Abdoulaye Diallo**
 - Portfolio: [adiallo.dev](https://adiallo.dev)
-- GitHub: [@abdoulayediallo](https://github.com/abdoulayediallo)
+- GitHub: [@abdoulayediallo](https://github.com/elhadjdiab)
