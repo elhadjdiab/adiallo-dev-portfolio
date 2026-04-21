@@ -183,7 +183,7 @@ export default function AboutPage() {
                 Me contacter
               </Button>
               <Button
-                href="https://github.com"
+                href="https://github.com/elhadjdiab"
                 variant="secondary"
                 target="_blank"
                 rel="noreferrer"
@@ -192,7 +192,7 @@ export default function AboutPage() {
                 GitHub
               </Button>
               <Button
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/abdoulaye-diallo"
                 variant="secondary"
                 target="_blank"
                 rel="noreferrer"

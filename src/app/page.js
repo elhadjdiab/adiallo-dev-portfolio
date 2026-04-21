@@ -81,7 +81,7 @@ export default function Home() {
             {/* Social Links */}
             <div className="mt-8 flex justify-center gap-4">
               <a
-                href="https://github.com"
+                href="https://github.com/elhadjdiab"
                 target="_blank"
                 rel="noreferrer"
                 className="text-slate-500 transition-colors hover:text-slate-300"
@@ -89,7 +89,7 @@ export default function Home() {
                 <Github size={24} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/abdoulaye-diallo"
                 target="_blank"
                 rel="noreferrer"
                 className="text-slate-500 transition-colors hover:text-slate-300"
