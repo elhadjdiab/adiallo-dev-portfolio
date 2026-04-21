@@ -2,33 +2,35 @@
 
 import { motion } from "framer-motion";
 import TestimonialsList from "@/components/TestimonialsList";
+import Container from "@/components/ui/Container";
+import Badge from "@/components/ui/Badge";
 
-const slideUp = {
-  initial: { opacity: 0, y: 28 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-10% 0px" },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, ease: "easeOut" },
 };
 
 export default function TestimonialsPage() {
   return (
-    <main className="bg-slate-950 px-4 pb-28 pt-12 sm:px-8 sm:pb-32 sm:pt-16">
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-20 sm:gap-32">
-        <motion.header
-          {...slideUp}
-          className="rounded-2xl border border-slate-800/50 bg-slate-900/40 p-10 backdrop-blur-md sm:p-12"
-        >
-          <p className="font-mono text-[10px] text-slate-500">testimonials</p>
-          <h1 className="mt-4 bg-gradient-to-br from-white via-white to-slate-500 bg-clip-text text-4xl font-semibold leading-tight text-transparent sm:text-5xl md:text-6xl">
-            Retours d’expérience
+    <main className="min-h-screen bg-[#0B0F14] pb-24 pt-32">
+      <Container size="lg">
+        {/* Header */}
+        <motion.header {...fadeIn} className="mb-16">
+          <Badge variant="default" className="mb-4">
+            testimonials
+          </Badge>
+          <h1 className="mb-6 text-4xl font-bold text-slate-100 sm:text-5xl md:text-6xl">
+            Témoignages
           </h1>
-          <p className="mt-6 max-w-3xl text-lg text-slate-400">
-            Messages et retours partagés après des collaborations, projets ou échanges techniques.
+          <p className="max-w-3xl text-lg leading-relaxed text-slate-400">
+            Retours de clients et collaborateurs sur les projets réalisés.
           </p>
         </motion.header>
 
+        {/* Testimonials Grid */}
         <TestimonialsList />
-      </section>
+      </Container>
     </main>
   );
 }

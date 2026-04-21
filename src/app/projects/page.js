@@ -2,34 +2,36 @@
 
 import { motion } from "framer-motion";
 import ProjectsList from "@/components/ProjectsList";
+import Container from "@/components/ui/Container";
+import Badge from "@/components/ui/Badge";
 
-const slideUp = {
-  initial: { opacity: 0, y: 28 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-10% 0px" },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, ease: "easeOut" },
 };
-
-const headerCard =
-  "rounded-2xl border border-white/[0.06] bg-slate-950/50 p-10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),inset_0_-2px_12px_0_rgba(0,0,0,0.5)] backdrop-blur-sm sm:p-12";
 
 export default function ProjectsPage() {
   return (
-    <main className="bg-slate-950 px-4 pb-28 pt-12 sm:px-8 sm:pb-32 sm:pt-16">
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-20 sm:gap-32">
-        <motion.header {...slideUp} className={headerCard}>
-          <p className="font-mono text-[10px] text-slate-500">projects</p>
-          <h1 className="mt-4 bg-gradient-to-br from-white via-white to-slate-500 bg-clip-text text-4xl font-semibold tracking-tight text-transparent sm:text-5xl md:text-6xl">
+    <main className="min-h-screen bg-[#0B0F14] pb-24 pt-32">
+      <Container size="lg">
+        {/* Header */}
+        <motion.header {...fadeIn} className="mb-16">
+          <Badge variant="default" className="mb-4">
+            projects
+          </Badge>
+          <h1 className="mb-6 text-4xl font-bold text-slate-100 sm:text-5xl md:text-6xl">
             Travaux sélectionnés
           </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-400">
-            Dépôts publics, stacks listées, liens démo quand ils existent. Rien d’annoncé comme
+          <p className="max-w-3xl text-lg leading-relaxed text-slate-400">
+            Dépôts publics, stacks listées, liens démo quand ils existent. Rien d'annoncé comme
             « game-changer » : juste du code et des choix techniques assumés.
           </p>
         </motion.header>
 
+        {/* Projects Grid */}
         <ProjectsList />
-      </section>
+      </Container>
     </main>
   );
 }

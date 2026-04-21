@@ -7,9 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { loginStart, loginSuccess, loginFailure } from "@/store/slices/authSlice";
 import { persistAuthSession } from "@/lib/authStorage";
+import Card from "@/components/ui/Card";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
-const inputClass =
-  "w-full rounded-lg border border-white/[0.12] bg-transparent px-4 py-3 text-[15px] text-slate-100 placeholder:text-slate-600 outline-none transition-colors duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/40";
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, ease: "easeOut" },
+};
 
 function validateEmail(email) {
   return /^\S+@\S+\.\S+$/.test(email.trim());
@@ -26,8 +32,8 @@ export default function LoginPage() {
 
   function validate() {
     const next = {};
-    if (!email.trim()) next.email = "L’email est requis.";
-    else if (!validateEmail(email)) next.email = "Format d’email invalide.";
+    if (!email.trim()) next.email = "L'email est requis.";
+    else if (!validateEmail(email)) next.email = "Format d'email invalide.";
     if (!password) next.password = "Le mot de passe est requis.";
     else if (password.length <= 6) next.password = "Le mot de passe doit faire plus de 6 caractères.";
     setFieldErrors(next);
@@ -69,24 +75,16 @@ export default function LoginPage() {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="w-full max-w-[400px] rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-xl sm:p-10"
-    >
-      <div className="mb-8 text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-white">Connexion</h1>
-        <p className="mt-2 text-sm text-slate-500">Accès sécurisé au tableau de bord.</p>
-      </div>
+    <motion.div {...fadeIn} className="w-full max-w-md">
+      <Card hover={false}>
+        <div className="mb-8 text-center">
+          <h1 className="text-2xl font-bold text-slate-100">Connexion</h1>
+          <p className="mt-2 text-sm text-slate-400">Accès sécurisé au tableau de bord.</p>
+        </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <div>
-          <label htmlFor="login-email" className="mb-2 block text-xs font-medium text-slate-500">
-            Email
-          </label>
-          <input
-            id="login-email"
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <Input
+            label="Email"
             type="email"
             autoComplete="email"
             value={email}
@@ -94,18 +92,12 @@ export default function LoginPage() {
               setEmail(e.target.value);
               clearServerError();
             }}
-            className={inputClass}
             placeholder="vous@exemple.com"
+            error={fieldErrors.email}
           />
-          {fieldErrors.email && <p className="mt-1.5 text-xs text-red-400/90">{fieldErrors.email}</p>}
-        </div>
 
-        <div>
-          <label htmlFor="login-password" className="mb-2 block text-xs font-medium text-slate-500">
-            Mot de passe
-          </label>
-          <input
-            id="login-password"
+          <Input
+            label="Mot de passe"
             type="password"
             autoComplete="current-password"
             value={password}
@@ -113,35 +105,28 @@ export default function LoginPage() {
               setPassword(e.target.value);
               clearServerError();
             }}
-            className={inputClass}
             placeholder="••••••••"
+            error={fieldErrors.password}
           />
-          {fieldErrors.password && (
-            <p className="mt-1.5 text-xs text-red-400/90">{fieldErrors.password}</p>
+
+          {error && (
+            <Card hover={false} className="border-red-500/25 bg-red-500/10 text-red-200">
+              <p className="text-sm">{error}</p>
+            </Card>
           )}
-        </div>
 
-        {error && (
-          <p className="rounded-lg border border-red-500/20 bg-red-500/5 px-3 py-2 text-center text-xs text-red-300/90">
-            {error}
-          </p>
-        )}
+          <Button type="submit" variant="primary" className="w-full" disabled={loading}>
+            {loading ? "Connexion…" : "Se connecter"}
+          </Button>
+        </form>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="mt-2 w-full rounded-lg bg-white py-3 text-sm font-semibold text-black transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {loading ? "Connexion…" : "Se connecter"}
-        </button>
-      </form>
-
-      <p className="mt-8 text-center text-sm text-slate-500">
-        Pas encore de compte ?{" "}
-        <Link href="/register" className="font-medium text-slate-300 underline-offset-4 hover:text-white hover:underline">
-          Créer un compte
-        </Link>
-      </p>
+        <p className="mt-8 text-center text-sm text-slate-400">
+          Pas encore de compte ?{" "}
+          <Link href="/register" className="font-medium text-indigo-400 hover:text-indigo-300">
+            Créer un compte
+          </Link>
+        </p>
+      </Card>
     </motion.div>
   );
 }
