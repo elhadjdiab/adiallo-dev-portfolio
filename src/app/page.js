@@ -68,11 +68,11 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/projects" variant="primary" size="lg">
+              <Button href="/projects" variant="primary" size="lg" className="gap-2">
                 <Rocket size={20} />
                 Voir mes projets
               </Button>
-              <Button href="/contact" variant="secondary" size="lg">
+              <Button href="/contact" variant="secondary" size="lg" className="gap-2">
                 <Mail size={20} />
                 Me contacter
               </Button>
@@ -189,7 +189,7 @@ export default function Home() {
                     Découvrez mes dernières réalisations
                   </p>
                 </div>
-                <Button href="/projects" variant="ghost">
+                <Button href="/projects" variant="ghost" className="gap-2">
                   Voir tout
                   <ArrowRight size={16} />
                 </Button>
@@ -290,7 +290,7 @@ export default function Home() {
               </div>
 
               <div className="mt-8 text-center">
-                <Button href="/testimonials" variant="secondary">
+                <Button href="/testimonials" variant="secondary" className="gap-2">
                   Voir tous les témoignages
                   <ArrowRight size={16} />
                 </Button>
@@ -317,11 +317,11 @@ export default function Home() {
                 Discutons de votre projet et voyons comment je peux vous aider à le concrétiser.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button href="/contact" variant="primary" size="lg">
+                <Button href="/contact" variant="primary" size="lg" className="gap-2">
                   <Mail size={20} />
                   Démarrer un projet
                 </Button>
-                <Button href="/about" variant="secondary" size="lg">
+                <Button href="/about" variant="secondary" size="lg" className="gap-2">
                   En savoir plus
                   <ArrowRight size={16} />
                 </Button>

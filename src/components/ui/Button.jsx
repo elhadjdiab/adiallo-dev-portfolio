@@ -23,7 +23,7 @@ export default function Button({
   ...props
 }) {
   const baseStyles =
-    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 

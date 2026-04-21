@@ -24,7 +24,8 @@ export default function ProjectsPage() {
             Travaux sélectionnés
           </h1>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-400">
-            Dépôts publics, stacks listées, liens démo quand ils existent. juste du code et des choix techniques assumés.
+            Dépôts publics, stacks listées, liens démo quand ils existent. Rien d'annoncé comme
+            « game-changer » : juste du code et des choix techniques assumés.
           </p>
         </motion.header>
 
