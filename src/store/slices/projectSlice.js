@@ -26,4 +26,20 @@ const projectsSlice = createSlice({
 });
 
 export const { fetchStart, fetchSuccess, fetchFailure } = projectsSlice.actions;
+
+export const fetchProjects = () => async (dispatch) => {
+  dispatch(fetchStart());
+  try {
+    const response = await fetch('/api/projects');
+    if (!response.ok) {
+      const payload = await response.json().catch(() => ({}));
+      throw new Error(payload.error || 'Impossible de recuperer les projets.');
+    }
+    const data = await response.json();
+    dispatch(fetchSuccess(data));
+  } catch (error) {
+    dispatch(fetchFailure(error.message || 'Erreur inconnue.'));
+  }
+};
+
 export default projectsSlice.reducer;
