@@ -18,11 +18,6 @@ export default function Button({
   size = "md",
   href,
   className = "",
-  target,
-  rel,
-  disabled,
-  type,
-  onClick,
   ...props
 }) {
   const baseStyles =
@@ -30,46 +25,29 @@ export default function Button({
 
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  // If it's a button (no href)
-  if (!href) {
+  // If href is provided, render as link
+  if (href) {
+    // External link
+    if (href.startsWith('http') || href.startsWith('mailto:')) {
+      return (
+        <a href={href} className={classes} {...props}>
+          {children}
+        </a>
+      );
+    }
+    
+    // Internal link
     return (
-      <button 
-        className={classes} 
-        disabled={disabled}
-        type={type}
-        onClick={onClick}
-        {...props}
-      >
+      <Link href={href} className={classes} {...props}>
         {children}
-      </button>
+      </Link>
     );
   }
 
-  // External link
-  if (href.startsWith('http') || href.startsWith('mailto:') || target === '_blank') {
-    return (
-      <a 
-        href={href} 
-        className={classes} 
-        target={target} 
-        rel={rel}
-        onClick={onClick}
-        {...props}
-      >
-        {children}
-      </a>
-    );
-  }
-  
-  // Internal link with Next.js Link
+  // Otherwise render as button
   return (
-    <Link 
-      href={href} 
-      className={classes}
-      onClick={onClick}
-      {...props}
-    >
+    <button className={classes} {...props}>
       {children}
-    </Link>
+    </button>
   );
 }
