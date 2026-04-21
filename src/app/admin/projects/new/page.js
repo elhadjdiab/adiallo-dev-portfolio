@@ -81,8 +81,10 @@ export default function NewProjectPage() {
     setSubmitting(true);
 
     try {
-      // Récupérer le token depuis localStorage
-      const token = localStorage.getItem("token");
+      // Récupérer le token depuis localStorage avec la bonne clé
+      const token = localStorage.getItem("auth_token");
+      
+      console.log("Token présent:", !!token); // Debug
       
       const res = await fetch("/api/projects", {
         method: "POST",
@@ -100,6 +102,8 @@ export default function NewProjectPage() {
         }),
       });
 
+      console.log("Response status:", res.status); // Debug
+
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Erreur lors de la création");
@@ -107,6 +111,7 @@ export default function NewProjectPage() {
 
       router.push("/admin/projects");
     } catch (err) {
+      console.error("Erreur complète:", err); // Debug
       setError(err.message);
     } finally {
       setSubmitting(false);

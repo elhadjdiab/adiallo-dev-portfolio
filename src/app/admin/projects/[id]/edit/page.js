@@ -101,8 +101,8 @@ export default function EditProjectPage() {
     setSubmitting(true);
 
     try {
-      // Récupérer le token depuis localStorage
-      const token = localStorage.getItem("token");
+      // Récupérer le token depuis localStorage avec la bonne clé
+      const token = localStorage.getItem("auth_token");
       
       const res = await fetch(`/api/projects/${params.id}`, {
         method: "PUT",

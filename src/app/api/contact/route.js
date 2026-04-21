@@ -34,7 +34,6 @@ export async function POST(req) {
 
 // GET Protégé pour lister les messages
 export async function GET(req) {
-  // TODO: Ajouter ta logique de vérification de session/admin ici
   try {
     const messages = await prisma.contactMessage.findMany({
       orderBy: { createdAt: 'desc' }

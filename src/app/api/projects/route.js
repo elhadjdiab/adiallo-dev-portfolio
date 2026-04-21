@@ -44,7 +44,14 @@ export async function GET() {
 
 export async function POST(request) {
   try {
+    // Debug: vérifier les headers
+    const authHeader = request.headers.get('authorization');
+    console.log("Auth header reçu:", authHeader ? "Présent" : "Absent");
+    console.log("Auth header value:", authHeader?.substring(0, 30) + "...");
+    
     const authUser = getAuthUser(request);
+    console.log("Auth user:", authUser ? "Authentifié" : "Non authentifié");
+    
     if (!authUser) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
