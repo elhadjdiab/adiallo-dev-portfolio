@@ -24,7 +24,7 @@ const adminSections = [
     description: "Gérer les projets du portfolio",
     icon: FolderGit2,
     href: "/admin/projects",
-    badge: "À venir",
+    badge: null,
   },
   {
     id: "testimonials",
