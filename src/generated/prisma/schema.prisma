@@ -46,6 +46,7 @@ model ProjectTechnology {
 model Testimonial {
   id        Int      @id @default(autoincrement())
   content   String
+  status    String   @default("pending") // pending, approved, rejected
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    Int

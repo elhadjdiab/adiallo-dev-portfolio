@@ -2,26 +2,17 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getTokenFromRequest, verifyToken } from "@/lib/auth";
 
-function parseId(id) {
-  const parsed = Number(id);
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
-}
-
 function getAuthUser(request) {
   const token = getTokenFromRequest(request);
   if (!token) return null;
   return verifyToken(token);
 }
 
+// GET - Récupérer un témoignage spécifique
 export async function GET(request, { params }) {
   try {
-    const testimonialId = parseId(params.id);
-    if (!testimonialId) {
-      return NextResponse.json({ error: "ID invalide." }, { status: 400 });
-    }
-
     const testimonial = await prisma.testimonial.findUnique({
-      where: { id: testimonialId },
+      where: { id: parseInt(params.id) },
       include: {
         user: {
           select: { id: true, name: true, email: true },
@@ -31,7 +22,7 @@ export async function GET(request, { params }) {
 
     if (!testimonial) {
       return NextResponse.json(
-        { error: "Temoignage introuvable." },
+        { error: "Temoignage non trouve." },
         { status: 404 }
       );
     }
@@ -45,6 +36,43 @@ export async function GET(request, { params }) {
   }
 }
 
+// PATCH - Changer le status (approuver/rejeter)
+export async function PATCH(request, { params }) {
+  try {
+    const authUser = getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+    }
+
+    const { status } = await request.json();
+
+    if (!["pending", "approved", "rejected"].includes(status)) {
+      return NextResponse.json(
+        { error: "Status invalide. Doit etre: pending, approved ou rejected." },
+        { status: 400 }
+      );
+    }
+
+    const testimonial = await prisma.testimonial.update({
+      where: { id: parseInt(params.id) },
+      data: { status },
+      include: {
+        user: {
+          select: { id: true, name: true, email: true },
+        },
+      },
+    });
+
+    return NextResponse.json(testimonial);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Impossible de modifier le status." },
+      { status: 500 }
+    );
+  }
+}
+
+// PUT - Modifier le contenu
 export async function PUT(request, { params }) {
   try {
     const authUser = getAuthUser(request);
@@ -52,38 +80,41 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
-    const testimonialId = parseId(params.id);
-    if (!testimonialId) {
-      return NextResponse.json({ error: "ID invalide." }, { status: 400 });
-    }
+    const { content, status } = await request.json();
 
-    const existing = await prisma.testimonial.findUnique({
-      where: { id: testimonialId },
-      select: { userId: true },
-    });
-
-    if (!existing) {
-      return NextResponse.json(
-        { error: "Temoignage introuvable." },
-        { status: 404 }
-      );
-    }
-
-    if (existing.userId !== authUser.id) {
-      return NextResponse.json({ error: "Acces refuse." }, { status: 403 });
-    }
-
-    const { content } = await request.json();
     if (!content || !content.trim()) {
       return NextResponse.json(
-        { error: "Le contenu du temoignage est obligatoire." },
+        { error: "Le contenu est obligatoire." },
         { status: 400 }
       );
     }
 
+    if (content.trim().length < 20) {
+      return NextResponse.json(
+        { error: "Le temoignage doit contenir au moins 20 caracteres." },
+        { status: 400 }
+      );
+    }
+
+    if (content.trim().length > 500) {
+      return NextResponse.json(
+        { error: "Le temoignage ne peut pas depasser 500 caracteres." },
+        { status: 400 }
+      );
+    }
+
+    const updateData = {
+      content: content.trim(),
+    };
+
+    // Optionnel : mettre à jour le status aussi
+    if (status && ["pending", "approved", "rejected"].includes(status)) {
+      updateData.status = status;
+    }
+
     const testimonial = await prisma.testimonial.update({
-      where: { id: testimonialId },
-      data: { content: content.trim() },
+      where: { id: parseInt(params.id) },
+      data: updateData,
       include: {
         user: {
           select: { id: true, name: true, email: true },
@@ -100,6 +131,7 @@ export async function PUT(request, { params }) {
   }
 }
 
+// DELETE - Supprimer un témoignage
 export async function DELETE(request, { params }) {
   try {
     const authUser = getAuthUser(request);
@@ -107,32 +139,11 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }
 
-    const testimonialId = parseId(params.id);
-    if (!testimonialId) {
-      return NextResponse.json({ error: "ID invalide." }, { status: 400 });
-    }
-
-    const existing = await prisma.testimonial.findUnique({
-      where: { id: testimonialId },
-      select: { userId: true },
-    });
-
-    if (!existing) {
-      return NextResponse.json(
-        { error: "Temoignage introuvable." },
-        { status: 404 }
-      );
-    }
-
-    if (existing.userId !== authUser.id) {
-      return NextResponse.json({ error: "Acces refuse." }, { status: 403 });
-    }
-
     await prisma.testimonial.delete({
-      where: { id: testimonialId },
+      where: { id: parseInt(params.id) },
     });
 
-    return NextResponse.json({ message: "Temoignage supprime." });
+    return NextResponse.json({ message: "Temoignage supprime avec succes." });
   } catch (error) {
     return NextResponse.json(
       { error: "Impossible de supprimer le temoignage." },

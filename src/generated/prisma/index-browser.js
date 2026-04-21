@@ -149,6 +149,7 @@ exports.Prisma.ProjectTechnologyScalarFieldEnum = {
 exports.Prisma.TestimonialScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'

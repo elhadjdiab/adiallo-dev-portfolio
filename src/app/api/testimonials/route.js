@@ -10,7 +10,11 @@ function getAuthUser(request) {
 
 export async function GET() {
   try {
+    // Retourner seulement les témoignages approuvés pour le public
     const testimonials = await prisma.testimonial.findMany({
+      where: {
+        status: "approved",
+      },
       include: {
         user: {
           select: { id: true, name: true, email: true },
@@ -43,9 +47,24 @@ export async function POST(request) {
       );
     }
 
+    if (content.trim().length < 20) {
+      return NextResponse.json(
+        { error: "Le temoignage doit contenir au moins 20 caracteres." },
+        { status: 400 }
+      );
+    }
+
+    if (content.trim().length > 500) {
+      return NextResponse.json(
+        { error: "Le temoignage ne peut pas depasser 500 caracteres." },
+        { status: 400 }
+      );
+    }
+
     const testimonial = await prisma.testimonial.create({
       data: {
         content: content.trim(),
+        status: "pending", // Par défaut en attente de modération
         userId: authUser.id,
       },
       include: {

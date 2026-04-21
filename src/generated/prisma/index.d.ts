@@ -5789,6 +5789,7 @@ export namespace Prisma {
   export type TestimonialMinAggregateOutputType = {
     id: number | null
     content: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -5797,6 +5798,7 @@ export namespace Prisma {
   export type TestimonialMaxAggregateOutputType = {
     id: number | null
     content: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -5805,6 +5807,7 @@ export namespace Prisma {
   export type TestimonialCountAggregateOutputType = {
     id: number
     content: number
+    status: number
     createdAt: number
     updatedAt: number
     userId: number
@@ -5825,6 +5828,7 @@ export namespace Prisma {
   export type TestimonialMinAggregateInputType = {
     id?: true
     content?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -5833,6 +5837,7 @@ export namespace Prisma {
   export type TestimonialMaxAggregateInputType = {
     id?: true
     content?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -5841,6 +5846,7 @@ export namespace Prisma {
   export type TestimonialCountAggregateInputType = {
     id?: true
     content?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -5936,6 +5942,7 @@ export namespace Prisma {
   export type TestimonialGroupByOutputType = {
     id: number
     content: string
+    status: string
     createdAt: Date
     updatedAt: Date
     userId: number
@@ -5963,6 +5970,7 @@ export namespace Prisma {
   export type TestimonialSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -5972,6 +5980,7 @@ export namespace Prisma {
   export type TestimonialSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -5981,6 +5990,7 @@ export namespace Prisma {
   export type TestimonialSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -5990,12 +6000,13 @@ export namespace Prisma {
   export type TestimonialSelectScalar = {
     id?: boolean
     content?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
   }
 
-  export type TestimonialOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["testimonial"]>
+  export type TestimonialOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "status" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["testimonial"]>
   export type TestimonialInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -6014,6 +6025,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       content: string
+      status: string
       createdAt: Date
       updatedAt: Date
       userId: number
@@ -6443,6 +6455,7 @@ export namespace Prisma {
   interface TestimonialFieldRefs {
     readonly id: FieldRef<"Testimonial", 'Int'>
     readonly content: FieldRef<"Testimonial", 'String'>
+    readonly status: FieldRef<"Testimonial", 'String'>
     readonly createdAt: FieldRef<"Testimonial", 'DateTime'>
     readonly updatedAt: FieldRef<"Testimonial", 'DateTime'>
     readonly userId: FieldRef<"Testimonial", 'Int'>
@@ -7965,6 +7978,7 @@ export namespace Prisma {
   export const TestimonialScalarFieldEnum: {
     id: 'id',
     content: 'content',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
@@ -8263,6 +8277,7 @@ export namespace Prisma {
     NOT?: TestimonialWhereInput | TestimonialWhereInput[]
     id?: IntFilter<"Testimonial"> | number
     content?: StringFilter<"Testimonial"> | string
+    status?: StringFilter<"Testimonial"> | string
     createdAt?: DateTimeFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeFilter<"Testimonial"> | Date | string
     userId?: IntFilter<"Testimonial"> | number
@@ -8272,6 +8287,7 @@ export namespace Prisma {
   export type TestimonialOrderByWithRelationInput = {
     id?: SortOrder
     content?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -8284,6 +8300,7 @@ export namespace Prisma {
     OR?: TestimonialWhereInput[]
     NOT?: TestimonialWhereInput | TestimonialWhereInput[]
     content?: StringFilter<"Testimonial"> | string
+    status?: StringFilter<"Testimonial"> | string
     createdAt?: DateTimeFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeFilter<"Testimonial"> | Date | string
     userId?: IntFilter<"Testimonial"> | number
@@ -8293,6 +8310,7 @@ export namespace Prisma {
   export type TestimonialOrderByWithAggregationInput = {
     id?: SortOrder
     content?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -8309,6 +8327,7 @@ export namespace Prisma {
     NOT?: TestimonialScalarWhereWithAggregatesInput | TestimonialScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Testimonial"> | number
     content?: StringWithAggregatesFilter<"Testimonial"> | string
+    status?: StringWithAggregatesFilter<"Testimonial"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Testimonial"> | Date | string
     userId?: IntWithAggregatesFilter<"Testimonial"> | number
@@ -8578,6 +8597,7 @@ export namespace Prisma {
 
   export type TestimonialCreateInput = {
     content: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTestimonialsInput
@@ -8586,6 +8606,7 @@ export namespace Prisma {
   export type TestimonialUncheckedCreateInput = {
     id?: number
     content: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -8593,6 +8614,7 @@ export namespace Prisma {
 
   export type TestimonialUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTestimonialsNestedInput
@@ -8601,6 +8623,7 @@ export namespace Prisma {
   export type TestimonialUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -8609,6 +8632,7 @@ export namespace Prisma {
   export type TestimonialCreateManyInput = {
     id?: number
     content: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -8616,6 +8640,7 @@ export namespace Prisma {
 
   export type TestimonialUpdateManyMutationInput = {
     content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8623,6 +8648,7 @@ export namespace Prisma {
   export type TestimonialUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -8975,6 +9001,7 @@ export namespace Prisma {
   export type TestimonialCountOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -8988,6 +9015,7 @@ export namespace Prisma {
   export type TestimonialMaxOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -8996,6 +9024,7 @@ export namespace Prisma {
   export type TestimonialMinOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -9400,6 +9429,7 @@ export namespace Prisma {
 
   export type TestimonialCreateWithoutUserInput = {
     content: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9407,6 +9437,7 @@ export namespace Prisma {
   export type TestimonialUncheckedCreateWithoutUserInput = {
     id?: number
     content: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9442,6 +9473,7 @@ export namespace Prisma {
     NOT?: TestimonialScalarWhereInput | TestimonialScalarWhereInput[]
     id?: IntFilter<"Testimonial"> | number
     content?: StringFilter<"Testimonial"> | string
+    status?: StringFilter<"Testimonial"> | string
     createdAt?: DateTimeFilter<"Testimonial"> | Date | string
     updatedAt?: DateTimeFilter<"Testimonial"> | Date | string
     userId?: IntFilter<"Testimonial"> | number
@@ -9658,12 +9690,14 @@ export namespace Prisma {
   export type TestimonialCreateManyUserInput = {
     id?: number
     content: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type TestimonialUpdateWithoutUserInput = {
     content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9671,6 +9705,7 @@ export namespace Prisma {
   export type TestimonialUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9678,6 +9713,7 @@ export namespace Prisma {
   export type TestimonialUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
