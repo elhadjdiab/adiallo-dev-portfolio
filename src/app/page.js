@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -28,6 +28,7 @@ const techStack = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const [projects, setProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
 
@@ -69,20 +70,20 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Link 
-                href="/projects" 
+              <button 
+                onClick={() => router.push('/projects')}
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95"
               >
                 <Rocket size={20} />
                 Voir mes projets
-              </Link>
-              <Link 
-                href="/contact" 
+              </button>
+              <button 
+                onClick={() => router.push('/contact')}
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
               >
                 <Mail size={20} />
                 Me contacter
-              </Link>
+              </button>
             </div>
 
             {/* Social Links */}
@@ -209,10 +210,13 @@ export default function Home() {
                     Découvrez mes dernières réalisations
                   </p>
                 </div>
-                <Button href="/projects" variant="ghost" className="gap-2">
+                <button 
+                  onClick={() => router.push('/projects')}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-400 transition-all duration-200 hover:bg-slate-800/50 hover:text-slate-100 active:scale-95"
+                >
                   Voir tout
                   <ArrowRight size={16} />
-                </Button>
+                </button>
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -310,10 +314,13 @@ export default function Home() {
               </div>
 
               <div className="mt-8 text-center">
-                <Button href="/testimonials" variant="secondary" className="gap-2">
+                <button 
+                  onClick={() => router.push('/testimonials')}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
+                >
                   Voir tous les témoignages
                   <ArrowRight size={16} />
-                </Button>
+                </button>
               </div>
             </motion.div>
           </Container>
@@ -337,14 +344,20 @@ export default function Home() {
                 Discutons de votre projet et voyons comment je peux vous aider à le concrétiser.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button href="/contact" variant="primary" size="lg" className="gap-2">
+                <button 
+                  onClick={() => router.push('/contact')}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95"
+                >
                   <Mail size={20} />
                   Démarrer un projet
-                </Button>
-                <Button href="/about" variant="secondary" size="lg" className="gap-2">
+                </button>
+                <button 
+                  onClick={() => router.push('/about')}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
+                >
                   En savoir plus
                   <ArrowRight size={16} />
-                </Button>
+                </button>
               </div>
             </Card>
           </motion.div>
