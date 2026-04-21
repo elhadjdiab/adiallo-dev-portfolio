@@ -18,6 +18,8 @@ export default function Button({
   size = "md",
   href,
   className = "",
+  target,
+  rel,
   ...props
 }) {
   const baseStyles =
@@ -26,6 +28,16 @@ export default function Button({
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
   if (href) {
+    // External link
+    if (href.startsWith('http') || href.startsWith('mailto:') || target === '_blank') {
+      return (
+        <a href={href} className={classes} target={target} rel={rel} {...props}>
+          {children}
+        </a>
+      );
+    }
+    
+    // Internal link
     return (
       <Link href={href} className={classes} {...props}>
         {children}
