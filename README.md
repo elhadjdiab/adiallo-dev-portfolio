@@ -52,26 +52,41 @@ src/
 ├── app/                    # Pages Next.js (App Router)
 │   ├── (auth)/            # Routes auth (login, register)
 │   ├── admin/             # Dashboard admin
+│   │   ├── projects/      # CRUD projets
+│   │   └── testimonials/  # Modération témoignages
 │   ├── projects/          # Liste et détails projets
-│   ├── testimonials/      # Témoignages
-│   └── contact/           # Formulaire contact
+│   │   └── [id]/testimonial/  # Formulaire témoignage
+│   ├── testimonials/      # Témoignages publics
+│   ├── about/             # Page à propos
+│   ├── contact/           # Formulaire contact
+│   └── api/               # API routes
+│       ├── auth/          # Login, register
+│       ├── projects/      # CRUD projets
+│       ├── testimonials/  # CRUD témoignages
+│       ├── contact/       # Messages contact
+│       └── upload/        # Upload images
 ├── components/            # Composants React
 │   └── ui/               # Composants UI réutilisables
-├── lib/                   # Utilitaires
+├── lib/                   # Utilitaires et helpers
+│   └── messages.js       # Messages centralisés
 ├── store/                 # Redux store
 └── styles/               # CSS global
 ```
 
 ## 🔑 Features
 
-- ✅ Pages: Home, Projects, Testimonials, Contact
+- ✅ Pages: Home, Projects, About, Testimonials, Contact
 - ✅ Auth: Login, Register (JWT)
-- ✅ Admin: Dashboard protégé
-- ✅ API: REST endpoints (projects, testimonials, contact)
+- ✅ Admin: Dashboard protégé avec CRUD complet
+- ✅ Projects: Upload d'images, gestion complète
+- ✅ Testimonials: Système de modération (pending/approved/rejected)
+- ✅ API: REST endpoints (projects, testimonials, contact, upload)
 - ✅ Database: Prisma + SQLite
-- ✅ Responsive: Mobile-first design
+- ✅ Responsive: Mobile-first avec menu hamburger
 - ✅ Animations: Framer Motion optimisées
-- ✅ Accessibilité: WCAG AA
+- ✅ Accessibilité: aria-labels, alt texts descriptifs
+- ✅ SEO: Metadata sur toutes les pages
+- ✅ Toast notifications: Système de notifications élégant
 
 ## 🛠️ Scripts
 
@@ -94,7 +109,7 @@ JWT_SECRET="your-secret-key"
 ## 🎯 Composants UI
 
 ```jsx
-import { Button, Card, Badge, Input, Container } from "@/components/ui";
+import { Button, Card, Badge, Input, Container, Toast } from "@/components/ui";
 
 // Button
 <Button variant="primary|secondary|ghost" size="sm|md|lg">
@@ -118,6 +133,15 @@ import { Button, Card, Badge, Input, Container } from "@/components/ui";
 <Container size="sm|md|lg|xl">
   Content
 </Container>
+
+// Toast (via hook)
+import { useToast } from "@/components/ui/Toast";
+
+const { toast } = useToast();
+toast.success("Message de succès");
+toast.error("Message d'erreur");
+toast.warning("Avertissement");
+toast.info("Information");
 ```
 
 ## 🚀 Déploiement
