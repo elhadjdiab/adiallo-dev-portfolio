@@ -51,6 +51,10 @@ REDESIGN_PLAN.md
 DESIGN_SYSTEM.md
 PHASE_*.md
 
+# Tous les fichiers .md sauf README.md
+*.md
+!README.md
+
 # Uploads (images uploadées)
 /public/uploads/*
 !/public/uploads/.gitkeep
