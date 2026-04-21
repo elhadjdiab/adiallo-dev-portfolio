@@ -8,11 +8,6 @@ import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import { Code2, Rocket, Users, CheckCircle, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
-export const metadata = {
-  title: "Abdoulaye Diallo - Développeur Full-Stack JavaScript & TypeScript",
-  description: "Développeur Full-Stack spécialisé en React, Next.js, Node.js et TypeScript. Création d'applications web et mobile performantes et scalables.",
-};
-
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },

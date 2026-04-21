@@ -11,11 +11,6 @@ import Card from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 
-export const metadata = {
-  title: "Inscription - Abdoulaye Diallo",
-  description: "Créer un compte pour laisser des témoignages sur les projets.",
-};
-
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },

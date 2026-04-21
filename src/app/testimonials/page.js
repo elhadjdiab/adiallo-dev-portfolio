@@ -7,11 +7,6 @@ import Badge from "@/components/ui/Badge";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
-export const metadata = {
-  title: "Témoignages - Abdoulaye Diallo",
-  description: "Retours et témoignages de clients satisfaits sur les projets web et mobile réalisés.",
-};
-
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },

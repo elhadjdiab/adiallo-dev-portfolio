@@ -5,11 +5,6 @@ import ProjectsList from "@/components/ProjectsList";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
 
-export const metadata = {
-  title: "Projets - Abdoulaye Diallo",
-  description: "Portfolio de projets web et mobile réalisés avec React, Next.js, Node.js, TypeScript et autres technologies modernes.",
-};
-
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
