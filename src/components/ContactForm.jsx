@@ -107,7 +107,7 @@ export default function ContactForm() {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Ton nom"
+              placeholder="Votre nom"
               autoComplete="name"
               required
             />
@@ -118,7 +118,7 @@ export default function ContactForm() {
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="ton@email.com"
+              placeholder="votre@email.com"
               autoComplete="email"
               required
             />
@@ -129,7 +129,7 @@ export default function ContactForm() {
             name="subject"
             value={form.subject}
             onChange={handleChange}
-            placeholder="Sujet de ton message"
+            placeholder="Sujet de votre message"
             autoComplete="off"
           />
 
@@ -139,7 +139,7 @@ export default function ContactForm() {
             value={form.message}
             onChange={handleChange}
             rows={6}
-            placeholder="Parle-moi de ton besoin..."
+            placeholder="Décrivez votre projet ou votre besoin..."
             required
           />
 
