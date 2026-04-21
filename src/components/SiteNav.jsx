@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 
 const links = [
   { href: "/", label: "Accueil" },
@@ -16,6 +17,7 @@ const links = [
 export default function SiteNav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const hideNav = pathname === "/login" || pathname === "/register";
 
@@ -25,6 +27,17 @@ export default function SiteNav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   if (hideNav) return null;
 
@@ -54,7 +67,8 @@ export default function SiteNav() {
           </div>
         </Link>
 
-        <nav className="flex items-center gap-1">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1">
           {links.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -75,7 +89,41 @@ export default function SiteNav() {
             );
           })}
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden rounded-lg p-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 transition-colors"
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 top-16 bg-slate-950/98 backdrop-blur-sm">
+          <nav className="flex flex-col p-6 space-y-2">
+            {links.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200 ${
+                    isActive
+                      ? "text-indigo-400 bg-indigo-500/10"
+                      : "text-slate-400 hover:text-slate-100 hover:bg-slate-800/50"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
