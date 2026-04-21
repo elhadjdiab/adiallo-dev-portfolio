@@ -42,8 +42,8 @@ export default function AboutPage() {
       <Container size="lg">
         {/* Header */}
         <motion.header {...fadeIn} className="mb-16">
-          <Badge variant="default" className="mb-4">
-            about
+          <Badge variant="#0B0F14" className="mb-4">
+            About
           </Badge>
           <h1 className="mb-4 text-4xl font-bold text-slate-100 sm:text-5xl md:text-6xl">
             À propos de moi
