@@ -37,13 +37,14 @@ export default function EditProjectPage() {
 
   const [techInput, setTechInput] = useState("");
 
+  // Redirection si non authentifié
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/login");
       return;
     }
     fetchProject();
-  }, [isAuthenticated, params.id]);
+  }, [isAuthenticated, params.id, router]);
 
   async function fetchProject() {
     try {

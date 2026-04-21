@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -35,8 +35,14 @@ export default function NewProjectPage() {
 
   const [techInput, setTechInput] = useState("");
 
+  // Redirection si non authentifié
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
   if (!isAuthenticated) {
-    router.push("/login");
     return null;
   }
 
