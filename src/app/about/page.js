@@ -7,6 +7,11 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { Code, Database, Server, Smartphone, Mail, Github, Linkedin } from "lucide-react";
 
+export const metadata = {
+  title: "À propos - Abdoulaye Diallo",
+  description: "Développeur Full-Stack passionné avec expertise en JavaScript/TypeScript, React, Next.js, Node.js. Découvrez mon parcours et mes compétences.",
+};
+
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -187,6 +192,7 @@ export default function AboutPage() {
                 variant="secondary"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Voir mon profil GitHub"
               >
                 <Github size={16} />
                 GitHub
@@ -196,6 +202,7 @@ export default function AboutPage() {
                 variant="secondary"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Voir mon profil LinkedIn"
               >
                 <Linkedin size={16} />
                 LinkedIn

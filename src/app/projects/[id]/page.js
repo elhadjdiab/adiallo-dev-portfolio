@@ -109,7 +109,7 @@ export default function ProjectDetailPage() {
               <div className="relative h-64 w-full overflow-hidden bg-slate-900 sm:h-80 md:h-96">
                 <img
                   src={project.imageUrl}
-                  alt={project.title}
+                  alt={`Capture d'écran du projet ${project.title}`}
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
@@ -153,6 +153,7 @@ export default function ProjectDetailPage() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
+                    aria-label={`Voir la démo en ligne de ${project.title}`}
                     className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-indigo-500"
                   >
                     <ExternalLink size={16} />
@@ -164,6 +165,7 @@ export default function ProjectDetailPage() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
+                    aria-label={`Voir le code source de ${project.title} sur GitHub`}
                     className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50"
                   >
                     <Github size={16} />

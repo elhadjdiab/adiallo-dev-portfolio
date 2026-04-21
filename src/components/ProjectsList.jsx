@@ -48,10 +48,10 @@ function ProjectsGrid({ projects }) {
             {/* Image du projet */}
             {project.imageUrl && (
               <div className="relative h-48 w-full overflow-hidden bg-slate-900">
-                <a href={`/projects/${project.id}`}>
+                <a href={`/projects/${project.id}`} aria-label={`Voir le projet ${project.title}`}>
                   <img
                     src={project.imageUrl}
-                    alt={project.title}
+                    alt={`Capture d'écran du projet ${project.title}`}
                     className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                   />
                 </a>
@@ -88,6 +88,7 @@ function ProjectsGrid({ projects }) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
+                    aria-label={`Voir la démo en ligne de ${project.title}`}
                     className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-3 py-2 text-xs text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50"
                   >
                     <ExternalLink size={12} />
@@ -99,6 +100,7 @@ function ProjectsGrid({ projects }) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
+                    aria-label={`Voir le code source de ${project.title} sur GitHub`}
                     className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-3 py-2 text-xs text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50"
                   >
                     <Github size={12} />
@@ -107,6 +109,7 @@ function ProjectsGrid({ projects }) {
                 )}
                 <a
                   href={`/projects/${project.id}/testimonial`}
+                  aria-label={`Laisser un témoignage pour ${project.title}`}
                   className="inline-flex items-center gap-2 rounded-lg border border-indigo-600/50 bg-indigo-600/10 px-3 py-2 text-xs text-indigo-400 transition-all duration-200 hover:border-indigo-500 hover:bg-indigo-600/20"
                 >
                   <MessageSquare size={12} />

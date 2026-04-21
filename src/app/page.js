@@ -8,6 +8,11 @@ import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import { Code2, Rocket, Users, CheckCircle, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
+export const metadata = {
+  title: "Abdoulaye Diallo - Développeur Full-Stack JavaScript & TypeScript",
+  description: "Développeur Full-Stack spécialisé en React, Next.js, Node.js et TypeScript. Création d'applications web et mobile performantes et scalables.",
+};
+
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -84,6 +89,7 @@ export default function Home() {
                 href="https://github.com/elhadjdiab"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Voir mon profil GitHub"
                 className="text-slate-500 transition-colors hover:text-slate-300"
               >
                 <Github size={24} />
@@ -92,6 +98,7 @@ export default function Home() {
                 href="https://linkedin.com/in/abdoulaye-diallo"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Voir mon profil LinkedIn"
                 className="text-slate-500 transition-colors hover:text-slate-300"
               >
                 <Linkedin size={24} />
@@ -202,13 +209,13 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
                   >
-                    <a href={`/projects/${project.id}`}>
+                    <a href={`/projects/${project.id}`} aria-label={`Voir le projet ${project.title}`}>
                       <Card className="h-full overflow-hidden p-0 transition-transform hover:scale-[1.02]">
                         {project.imageUrl && (
                           <div className="relative h-48 w-full overflow-hidden bg-slate-900">
                             <img
                               src={project.imageUrl}
-                              alt={project.title}
+                              alt={`Capture d'écran du projet ${project.title}`}
                               className="h-full w-full object-cover"
                             />
                           </div>
