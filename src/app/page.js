@@ -71,15 +71,21 @@ export default function Home() {
 
             <div className="flex flex-wrap justify-center gap-4">
               <button 
-                onClick={() => router.push('/projects')}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95"
+                onClick={() => {
+                  console.log('Clic sur Voir mes projets');
+                  router.push('/projects');
+                }}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95 cursor-pointer"
               >
                 <Rocket size={20} />
                 Voir mes projets
               </button>
               <button 
-                onClick={() => router.push('/contact')}
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
+                onClick={() => {
+                  console.log('Clic sur Me contacter');
+                  router.push('/contact');
+                }}
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95 cursor-pointer"
               >
                 <Mail size={20} />
                 Me contacter
