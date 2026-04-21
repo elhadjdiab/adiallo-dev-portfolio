@@ -70,26 +70,20 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <button 
-                onClick={() => {
-                  console.log('Clic sur Voir mes projets');
-                  router.push('/projects');
-                }}
+              <a 
+                href="/projects"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95 cursor-pointer"
               >
                 <Rocket size={20} />
                 Voir mes projets
-              </button>
-              <button 
-                onClick={() => {
-                  console.log('Clic sur Me contacter');
-                  router.push('/contact');
-                }}
+              </a>
+              <a 
+                href="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95 cursor-pointer"
               >
                 <Mail size={20} />
                 Me contacter
-              </button>
+              </a>
             </div>
 
             {/* Social Links */}
@@ -216,13 +210,13 @@ export default function Home() {
                     Découvrez mes dernières réalisations
                   </p>
                 </div>
-                <button 
-                  onClick={() => router.push('/projects')}
+                <a 
+                  href="/projects"
                   className="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-400 transition-all duration-200 hover:bg-slate-800/50 hover:text-slate-100 active:scale-95"
                 >
                   Voir tout
                   <ArrowRight size={16} />
-                </button>
+                </a>
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -320,13 +314,13 @@ export default function Home() {
               </div>
 
               <div className="mt-8 text-center">
-                <button 
-                  onClick={() => router.push('/testimonials')}
+                <a 
+                  href="/testimonials"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
                 >
                   Voir tous les témoignages
                   <ArrowRight size={16} />
-                </button>
+                </a>
               </div>
             </motion.div>
           </Container>
@@ -350,20 +344,20 @@ export default function Home() {
                 Discutons de votre projet et voyons comment je peux vous aider à le concrétiser.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <button 
-                  onClick={() => router.push('/contact')}
+                <a 
+                  href="/contact"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95"
                 >
                   <Mail size={20} />
                   Démarrer un projet
-                </button>
-                <button 
-                  onClick={() => router.push('/about')}
+                </a>
+                <a 
+                  href="/about"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
                 >
                   En savoir plus
                   <ArrowRight size={16} />
-                </button>
+                </a>
               </div>
             </Card>
           </motion.div>
