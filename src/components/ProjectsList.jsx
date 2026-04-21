@@ -47,8 +47,10 @@ function ProjectsGrid({ projects }) {
           <Card className="h-full flex flex-col">
             <TerminalBadge label={projectTerminalLabel(project)} />
 
-            <h2 className="mb-3 text-xl font-semibold text-slate-100">
-              {project.title}
+            <h2 className="mb-3 text-xl font-semibold text-slate-100 hover:text-indigo-400 transition-colors">
+              <a href={`/projects/${project.id}`}>
+                {project.title}
+              </a>
             </h2>
             <p className="mb-4 flex-1 text-sm leading-relaxed text-slate-400">
               {project.description}
