@@ -20,6 +20,9 @@ export default function Button({
   className = "",
   target,
   rel,
+  disabled,
+  type,
+  onClick,
   ...props
 }) {
   const baseStyles =
@@ -27,27 +30,46 @@ export default function Button({
 
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  if (href) {
-    // External link
-    if (href.startsWith('http') || href.startsWith('mailto:') || target === '_blank') {
-      return (
-        <a href={href} className={classes} target={target} rel={rel} {...props}>
-          {children}
-        </a>
-      );
-    }
-    
-    // Internal link
+  // If it's a button (no href)
+  if (!href) {
     return (
-      <Link href={href} className={classes} {...props}>
+      <button 
+        className={classes} 
+        disabled={disabled}
+        type={type}
+        onClick={onClick}
+        {...props}
+      >
         {children}
-      </Link>
+      </button>
     );
   }
 
+  // External link
+  if (href.startsWith('http') || href.startsWith('mailto:') || target === '_blank') {
+    return (
+      <a 
+        href={href} 
+        className={classes} 
+        target={target} 
+        rel={rel}
+        onClick={onClick}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+  
+  // Internal link with Next.js Link
   return (
-    <button className={classes} {...props}>
+    <Link 
+      href={href} 
+      className={classes}
+      onClick={onClick}
+      {...props}
+    >
       {children}
-    </button>
+    </Link>
   );
 }
