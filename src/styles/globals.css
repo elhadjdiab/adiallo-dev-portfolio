@@ -5,7 +5,7 @@
    ============================================ */
 
 :root {
-  /* Backgrounds */
+  /* Backgrounds - Mode sombre */
   --bg-primary: #0B0F14;
   --bg-surface: #111827;
   --bg-surface-hover: #0F172A;
@@ -24,6 +24,29 @@
   /* Borders */
   --border: #1E293B;
   --border-hover: #334155;
+}
+
+/* Mode clair */
+.light {
+  /* Backgrounds - Mode clair */
+  --bg-primary: #FFFFFF;
+  --bg-surface: #F8FAFC;
+  --bg-surface-hover: #F1F5F9;
+  
+  /* Colors (identiques) */
+  --primary: #6366F1;
+  --primary-hover: #4F46E5;
+  --accent: #22C55E;
+  --error: #EF4444;
+  
+  /* Text - Mode clair */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  
+  /* Borders - Mode clair */
+  --border: #E2E8F0;
+  --border-hover: #CBD5E1;
 }
 
 @theme inline {
@@ -47,6 +70,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ============================================

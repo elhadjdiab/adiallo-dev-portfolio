@@ -7,6 +7,7 @@ import { store } from "@/store";
 import SiteNav from "@/components/SiteNav";
 import MainShell from "@/components/MainShell";
 import AuthHydrate from "@/components/AuthHydrate";
+import ThemeProvider from "@/components/ThemeProvider";
 import { ToastProvider } from "@/components/ui/Toast";
 
 const inter = Inter({
@@ -22,9 +23,10 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={`${inter.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#0B0F14] font-sans text-slate-100">
+      <body className="min-h-full flex flex-col bg-[var(--bg-primary)] font-sans text-[var(--text-primary)] transition-colors duration-300">
         <Provider store={store}>
           <ToastProvider>
+            <ThemeProvider />
             <SiteNav />
             <AuthHydrate />
             <MainShell>{children}</MainShell>
