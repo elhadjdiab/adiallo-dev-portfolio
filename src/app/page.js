@@ -52,7 +52,7 @@ export default function Home() {
       <section className="relative overflow-hidden pb-24 pt-32">
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent" />
         <Container size="lg">
-          <motion.div {...fadeIn} className="text-center">
+          <div className="text-center">
             <Badge variant="primary" className="mb-6">
               Disponible pour vos projets
             </Badge>
@@ -124,7 +124,7 @@ export default function Home() {
                 <Linkedin size={24} />
               </a>
             </div>
-          </motion.div>
+          </div>
         </Container>
       </section>
 
