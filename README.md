@@ -290,40 +290,6 @@ Fonctionnalités mobiles :
 - ✅ Focus visible sur les éléments interactifs
 - ✅ Respect de `prefers-reduced-motion`
 
-##  Déploiement
-
-### Vercel (recommandé)
-
-1. Pusher le code sur GitHub
-2. Importer le projet sur [Vercel](https://vercel.com)
-3. Configurer les variables d'environnement
-4. Déployer !
-
-### Autre plateforme
-
-```bash
-# Build
-npm run build
-
-# Lancer en production
-npm run start
-```
-
-Variables d'environnement requises :
-- `DATABASE_URL`
-- `JWT_SECRET`
-- `NEXT_PUBLIC_API_URL` (optionnel)
-
-##  Contribution
-
-Les contributions sont les bienvenues ! Pour contribuer :
-
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit les changements (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
-
 ##  Changelog
 
 ### Version 2.0.0 (2026-04-21)
@@ -350,7 +316,7 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 ##  Auteur
 
 **Abdoulaye Diallo**
-- Portfolio: [adiallo.dev](https://adiallo.dev)
+- Portfolio: [adiallo.dev](https://adiallo.dev) - (prochainement)
 - GitHub: [@elhadjdiab](https://github.com/elhadjdiab)
 - LinkedIn: [Abdoulaye Diallo](https://linkedin.com/in/abdoulaye-diallo)
 
