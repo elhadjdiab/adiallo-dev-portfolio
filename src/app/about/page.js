@@ -42,8 +42,8 @@ export default function AboutPage() {
       <Container size="lg">
         {/* Header */}
         <motion.header {...fadeIn} className="mb-16">
-          <Badge variant="#0B0F14" className="mb-4">
-            About
+          <Badge variant="default" className="mb-4">
+            about
           </Badge>
           <h1 className="mb-4 text-4xl font-bold text-slate-100 sm:text-5xl md:text-6xl">
             À propos de moi
@@ -178,7 +178,7 @@ export default function AboutPage() {
               Vous avez un projet en tête ? N'hésitez pas à me contacter.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button href="/contact" variant="primary">
+              <Button href="/contact" variant="primary" className="gap-2">
                 <Mail size={16} />
                 Me contacter
               </Button>
@@ -188,7 +188,10 @@ export default function AboutPage() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Voir mon profil GitHub"
+                className="gap-2"
               >
+                <Github size={16} />
+                GitHub
               </Button>
               <Button
                 href="https://linkedin.com/in/abdoulaye-diallo"
@@ -196,7 +199,10 @@ export default function AboutPage() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Voir mon profil LinkedIn"
+                className="gap-2"
               >
+                <Linkedin size={16} />
+                LinkedIn
               </Button>
             </div>
           </Card>
