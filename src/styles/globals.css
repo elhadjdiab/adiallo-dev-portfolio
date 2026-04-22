@@ -73,9 +73,228 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Classes utilitaires pour le thème */
+.bg-theme-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-theme-surface {
+  background-color: var(--bg-surface);
+}
+
+.bg-theme-surface-hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.text-theme-primary {
+  color: var(--text-primary);
+}
+
+.text-theme-secondary {
+  color: var(--text-secondary);
+}
+
+.text-theme-muted {
+  color: var(--text-muted);
+}
+
+.border-theme {
+  border-color: var(--border);
+}
+
+.border-theme-hover {
+  border-color: var(--border-hover);
+}
+
+/* Classes pour les backgrounds avec opacité */
+.bg-slate-950\/95 {
+  background-color: rgba(2, 6, 23, 0.95);
+}
+
+.light .bg-slate-950\/95 {
+  background-color: rgba(248, 250, 252, 0.95);
+}
+
+.bg-slate-950\/98 {
+  background-color: rgba(2, 6, 23, 0.98);
+}
+
+.light .bg-slate-950\/98 {
+  background-color: rgba(248, 250, 252, 0.98);
+}
+
+/* Adaptations pour le mode clair */
+.light .bg-\[\#0B0F14\] {
+  background-color: #FFFFFF !important;
+}
+
+.light .bg-slate-900 {
+  background-color: #F1F5F9 !important;
+}
+
+.light .bg-slate-900\/50 {
+  background-color: rgba(241, 245, 249, 0.5) !important;
+}
+
+.light .bg-slate-800 {
+  background-color: #E2E8F0 !important;
+}
+
+.light .bg-slate-800\/50 {
+  background-color: rgba(226, 232, 240, 0.5) !important;
+}
+
+.light .text-slate-100 {
+  color: #0F172A !important;
+}
+
+.light .text-slate-200 {
+  color: #1E293B !important;
+}
+
+.light .text-slate-300 {
+  color: #334155 !important;
+}
+
+.light .text-slate-400 {
+  color: #64748B !important;
+}
+
+.light .text-slate-500 {
+  color: #64748B !important;
+}
+
+.light .text-slate-600 {
+  color: #475569 !important;
+}
+
+.light .border-slate-700 {
+  border-color: #CBD5E1 !important;
+}
+
+.light .border-slate-800 {
+  border-color: #E2E8F0 !important;
+}
+
+.light .border-slate-900 {
+  border-color: #F1F5F9 !important;
+}
+
+/* Cartes et surfaces */
+.light .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Hover states */
+.light .hover\:bg-slate-800:hover {
+  background-color: #E2E8F0 !important;
+}
+
+.light .hover\:bg-slate-800\/50:hover {
+  background-color: rgba(226, 232, 240, 0.5) !important;
+}
+
+.light .hover\:border-slate-600:hover {
+  border-color: #94A3B8 !important;
+}
+
+.light .hover\:border-slate-700:hover {
+  border-color: #CBD5E1 !important;
+}
+
+.light .hover\:text-slate-100:hover {
+  color: #0F172A !important;
+}
+
+.light .hover\:text-slate-300:hover {
+  color: #334155 !important;
+}
+
 /* ============================================
    UTILITY CLASSES
    ============================================ */
 
 /* Removed: .mesh-background - too heavy */
 /* Removed: .btn-subtle - replaced by component system */
+
+
+/* Gradients */
+.light .bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops)) !important;
+}
+
+.light .from-indigo-500\/5 {
+  --tw-gradient-from: rgba(99, 102, 241, 0.05) !important;
+  --tw-gradient-to: rgba(99, 102, 241, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.light .from-slate-900 {
+  --tw-gradient-from: #F1F5F9 !important;
+  --tw-gradient-to: rgba(241, 245, 249, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.light .via-slate-900\/50 {
+  --tw-gradient-to: rgba(241, 245, 249, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(241, 245, 249, 0.5), var(--tw-gradient-to) !important;
+}
+
+/* Rings et borders avec couleurs indigo */
+.light .ring-indigo-500\/20 {
+  --tw-ring-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+.light .border-indigo-500\/30 {
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+.light .border-indigo-500\/20 {
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+.light .border-indigo-500\/50 {
+  border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+.light .bg-indigo-500\/5 {
+  background-color: rgba(99, 102, 241, 0.05) !important;
+}
+
+.light .bg-indigo-500\/10 {
+  background-color: rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Erreurs et succès */
+.light .bg-red-500\/10 {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+.light .border-red-500\/20 {
+  border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+.light .border-red-500\/25 {
+  border-color: rgba(239, 68, 68, 0.25) !important;
+}
+
+.light .text-red-200 {
+  color: #991B1B !important;
+}
+
+.light .text-red-400 {
+  color: #DC2626 !important;
+}
+
+/* Transitions globales */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Désactiver les transitions pour certains éléments */
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
