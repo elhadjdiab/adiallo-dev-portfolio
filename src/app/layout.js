@@ -8,6 +8,7 @@ import SiteNav from "@/components/SiteNav";
 import MainShell from "@/components/MainShell";
 import AuthHydrate from "@/components/AuthHydrate";
 import ThemeProvider from "@/components/ThemeProvider";
+import ScrollToTop from "@/components/ScrollToTop";
 import { ToastProvider } from "@/components/ui/Toast";
 
 const inter = Inter({
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
             <ThemeProvider />
             <SiteNav />
             <AuthHydrate />
+            <ScrollToTop />
             <MainShell>{children}</MainShell>
           </ToastProvider>
         </Provider>

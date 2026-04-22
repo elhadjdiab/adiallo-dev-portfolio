@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjects } from "@/store/slices/projectSlice";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, MessageSquare } from "lucide-react";
+import { ExternalLink, Github, MessageSquare, FolderGit2 } from "lucide-react";
 import TerminalBadge from "@/components/TerminalBadge";
 import ProjectsGridSkeleton from "@/components/ProjectsGridSkeleton";
+import EmptyState from "@/components/EmptyState";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
@@ -22,11 +23,13 @@ const fadeIn = {
 function ProjectsGrid({ projects }) {
   if (!projects.length) {
     return (
-      <motion.div {...fadeIn}>
-        <Card className="text-center text-slate-400">
-          Aucun projet en base pour le moment.
-        </Card>
-      </motion.div>
+      <EmptyState
+        icon={FolderGit2}
+        title="Aucun projet pour le moment"
+        description="Les projets seront bientôt disponibles. Revenez plus tard pour découvrir mes réalisations."
+        actionLabel="Me contacter"
+        actionHref="/contact"
+      />
     );
   }
 

@@ -7,6 +7,8 @@ import Input from "@/components/ui/Input";
 import Textarea from "@/components/ui/Textarea";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+import { celebrateSuccess } from "@/lib/confetti";
+import { CheckCircle, AlertCircle, Send } from "lucide-react";
 
 const initialForm = {
   name: "",
@@ -77,6 +79,7 @@ export default function ContactForm() {
         type: "success",
         message: "Message envoyé avec succès. Je te réponds dès que possible.",
       });
+      celebrateSuccess(); // Confetti animation!
     } catch (error) {
       setStatus({
         type: "error",
@@ -154,22 +157,52 @@ export default function ContactForm() {
           />
 
           {status.type !== "idle" && (
-            <Card
-              hover={false}
-              className={
-                status.type === "success"
-                  ? "border-green-500/25 bg-green-500/10 text-green-200"
-                  : "border-red-500/25 bg-red-500/10 text-red-200"
-              }
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <p className="text-sm">{status.message}</p>
-            </Card>
+              <Card
+                hover={false}
+                className={
+                  status.type === "success"
+                    ? "border-green-500/25 bg-green-500/10"
+                    : "border-red-500/25 bg-red-500/10"
+                }
+              >
+                <div className="flex items-start gap-3">
+                  {status.type === "success" ? (
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
+                  ) : (
+                    <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-400" />
+                  )}
+                  <p className={`text-sm ${status.type === "success" ? "text-green-200" : "text-red-200"}`}>
+                    {status.message}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
           )}
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-slate-500">Réponse en 24h à 72h en moyenne</p>
-            <Button type="submit" variant="primary" disabled={submitting}>
-              {submitting ? "Envoi en cours..." : "Envoyer le message"}
+            <Button type="submit" variant="primary" disabled={submitting} className="gap-2">
+              {submitting ? (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Send size={16} />
+                  </motion.div>
+                  Envoi en cours...
+                </>
+              ) : (
+                <>
+                  <Send size={16} />
+                  Envoyer le message
+                </>
+              )}
             </Button>
           </div>
         </form>
