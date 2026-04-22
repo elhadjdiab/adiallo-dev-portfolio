@@ -1,10 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import { Code2, Rocket, Users, CheckCircle, ArrowRight, Linkedin, Mail } from "lucide-react";
@@ -28,7 +27,6 @@ const techStack = [
 ];
 
 export default function Home() {
-  const router = useRouter();
   const [projects, setProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
 
@@ -70,20 +68,20 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <a 
+              <Link 
                 href="/projects"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95"
               >
                 <Rocket size={20} />
                 Voir mes projets
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
               >
                 <Mail size={20} />
                 Me contacter
-              </a>
+              </Link>
             </div>
 
             {/* Social Links */}
@@ -210,13 +208,13 @@ export default function Home() {
                     Découvrez mes dernières réalisations
                   </p>
                 </div>
-                <a 
+                <Link 
                   href="/projects"
                   className="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-400 transition-all duration-200 hover:bg-slate-800/50 hover:text-slate-100 active:scale-95"
                 >
                   Voir tout
                   <ArrowRight size={16} />
-                </a>
+                </Link>
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -228,7 +226,7 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
                   >
-                    <a href={`/projects/${project.id}`} aria-label={`Voir le projet ${project.title}`}>
+                    <Link href={`/projects/${project.id}`} aria-label={`Voir le projet ${project.title}`}>
                       <Card className="h-full overflow-hidden p-0 transition-transform hover:scale-[1.02]">
                         {project.imageUrl && (
                           <div className="relative h-48 w-full overflow-hidden bg-slate-900">
@@ -257,7 +255,7 @@ export default function Home() {
                           )}
                         </div>
                       </Card>
-                    </a>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
@@ -314,13 +312,13 @@ export default function Home() {
               </div>
 
               <div className="mt-8 text-center">
-                <a 
+                <Link 
                   href="/testimonials"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
                 >
                   Voir tous les témoignages
                   <ArrowRight size={16} />
-                </a>
+                </Link>
               </div>
             </motion.div>
           </Container>
@@ -344,20 +342,20 @@ export default function Home() {
                 Discutons de votre projet et voyons comment je peux vous aider à le concrétiser.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a 
+                <Link 
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95"
                 >
                   <Mail size={20} />
                   Démarrer un projet
-                </a>
-                <a 
+                </Link>
+                <Link 
                   href="/about"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95"
                 >
                   En savoir plus
                   <ArrowRight size={16} />
-                </a>
+                </Link>
               </div>
             </Card>
           </motion.div>
