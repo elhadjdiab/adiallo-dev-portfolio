@@ -51,12 +51,12 @@ export default function SiteNav() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-6">
         <Link href="/" className="flex items-center gap-3 transition-opacity duration-200 hover:opacity-80">
-          <div className="relative h-9 w-9 overflow-hidden rounded-lg border border-slate-800">
+          <div className="relative h-10 w-10 overflow-hidden rounded-lg border-2 border-indigo-500/30 ring-2 ring-indigo-500/20">
             <Image
               src="/profile.png"
               alt="Abdoulaye Diallo"
               fill
-              sizes="36px"
+              sizes="40px"
               className="object-cover"
               priority
             />
