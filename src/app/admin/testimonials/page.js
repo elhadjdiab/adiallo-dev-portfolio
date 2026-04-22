@@ -19,7 +19,7 @@ const fadeIn = {
 
 export default function AdminTestimonialsPage() {
   const router = useRouter();
-  const { isAuthenticated } = useSelector((s) => s.auth);
+  const { isAuthenticated, user } = useSelector((s) => s.auth);
   const { toast } = useToast();
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,8 +31,15 @@ export default function AdminTestimonialsPage() {
       router.push("/login");
       return;
     }
+    
+    // Vérifier si l'utilisateur est admin
+    if (user && user.role !== 'admin') {
+      router.push("/admin");
+      return;
+    }
+    
     fetchTestimonials();
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, user, router]);
 
   async function fetchTestimonials() {
     try {

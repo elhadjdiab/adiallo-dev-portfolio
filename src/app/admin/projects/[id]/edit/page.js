@@ -22,7 +22,7 @@ const fadeIn = {
 export default function EditProjectPage() {
   const router = useRouter();
   const params = useParams();
-  const { isAuthenticated } = useSelector((s) => s.auth);
+  const { isAuthenticated, user } = useSelector((s) => s.auth);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -38,14 +38,20 @@ export default function EditProjectPage() {
 
   const [techInput, setTechInput] = useState("");
 
-  // Redirection si non authentifié
+  // Redirection si non authentifié ou pas admin
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/login");
       return;
     }
+    
+    if (user && user.role !== 'admin') {
+      router.push("/admin");
+      return;
+    }
+    
     fetchProject();
-  }, [isAuthenticated, params.id, router]);
+  }, [isAuthenticated, user, params.id, router]);
 
   async function fetchProject() {
     try {

@@ -19,7 +19,7 @@ const fadeIn = {
 
 export default function AdminProjectsPage() {
   const router = useRouter();
-  const { isAuthenticated } = useSelector((s) => s.auth);
+  const { isAuthenticated, user } = useSelector((s) => s.auth);
   const { toast } = useToast();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,8 +30,15 @@ export default function AdminProjectsPage() {
       router.push("/login");
       return;
     }
+    
+    // Vérifier si l'utilisateur est admin
+    if (user && user.role !== 'admin') {
+      router.push("/admin");
+      return;
+    }
+    
     fetchProjects();
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, user, router]);
 
   async function fetchProjects() {
     try {

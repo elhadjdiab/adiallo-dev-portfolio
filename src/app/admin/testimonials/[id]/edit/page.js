@@ -21,7 +21,7 @@ const fadeIn = {
 export default function EditTestimonialPage() {
   const router = useRouter();
   const params = useParams();
-  const { isAuthenticated } = useSelector((s) => s.auth);
+  const { isAuthenticated, user } = useSelector((s) => s.auth);
 
   const [testimonial, setTestimonial] = useState(null);
   const [content, setContent] = useState("");
@@ -33,6 +33,12 @@ export default function EditTestimonialPage() {
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/login");
+      return;
+    }
+    
+    // Vérifier si l'utilisateur est admin
+    if (user && user.role !== 'admin') {
+      router.push("/admin");
       return;
     }
 
@@ -58,7 +64,7 @@ export default function EditTestimonialPage() {
     }
 
     fetchTestimonial();
-  }, [isAuthenticated, router, params.id]);
+  }, [isAuthenticated, user, router, params.id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
