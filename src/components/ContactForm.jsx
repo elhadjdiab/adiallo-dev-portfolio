@@ -2,6 +2,13 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Card from "@/components/ui/Card";
+import Input from "@/components/ui/Input";
+import Textarea from "@/components/ui/Textarea";
+import Button from "@/components/ui/Button";
+import Badge from "@/components/ui/Badge";
+import { celebrateSuccess } from "@/lib/confetti";
+import { CheckCircle, AlertCircle, Send } from "lucide-react";
 
 const initialForm = {
   name: "",
@@ -9,6 +16,12 @@ const initialForm = {
   subject: "",
   message: "",
   honeypot: "",
+};
+
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, ease: "easeOut" },
 };
 
 export default function ContactForm() {
@@ -66,6 +79,7 @@ export default function ContactForm() {
         type: "success",
         message: "Message envoyé avec succès. Je te réponds dès que possible.",
       });
+      celebrateSuccess(); // Confetti animation!
     } catch (error) {
       setStatus({
         type: "error",
@@ -77,108 +91,122 @@ export default function ContactForm() {
   }
 
   return (
-    <motion.form
-      onSubmit={handleSubmit}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-8% 0px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl border border-slate-800/50 bg-slate-900/40 p-10 backdrop-blur-md transition-[border-color] duration-500 hover:border-cyan-500/40 sm:p-12"
-    >
-      <p className="font-mono text-[10px] text-slate-500">contact</p>
-      <h1 className="mt-4 bg-gradient-to-br from-white via-white to-slate-500 bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
-        Entrons en contact
-      </h1>
-      <p className="mt-4 max-w-2xl text-slate-400">
-        Projet, stage, collaboration ou question technique — écrivez-moi directement ici.
-      </p>
+    <motion.div {...fadeIn}>
+      <Card hover={false} className="max-w-3xl mx-auto">
+        <Badge variant="default" className="mb-4">
+          contact
+        </Badge>
+        <h1 className="mb-4 text-3xl font-bold text-slate-100 sm:text-4xl">
+          Entrons en contact
+        </h1>
+        <p className="mb-8 text-slate-400">
+          Projet, stage, collaboration ou question technique — écrivez-moi directement ici.
+        </p>
 
-      <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
-        <label className="block">
-          <span className="mb-2 block text-sm text-slate-400">Nom</span>
-          <input
-            name="name"
-            value={form.name}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <Input
+              label="Nom"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Votre nom"
+              autoComplete="name"
+              required
+            />
+
+            <Input
+              label="Email"
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="votre@email.com"
+              autoComplete="email"
+              required
+            />
+          </div>
+
+          <Input
+            label="Sujet (optionnel)"
+            name="subject"
+            value={form.subject}
             onChange={handleChange}
-            className="w-full rounded-xl border border-slate-800/50 bg-slate-950/50 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-cyan-500/30"
-            placeholder="Ton nom"
-            autoComplete="name"
+            placeholder="Sujet de votre message"
+            autoComplete="off"
+          />
+
+          <Textarea
+            label="Message"
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            rows={6}
+            placeholder="Décrivez votre projet ou votre besoin..."
             required
           />
-        </label>
 
-        <label className="block">
-          <span className="mb-2 block text-sm text-slate-400">Email</span>
           <input
-            type="email"
-            name="email"
-            value={form.email}
+            type="text"
+            name="honeypot"
+            value={form.honeypot}
             onChange={handleChange}
-            className="w-full rounded-xl border border-slate-800/50 bg-slate-950/50 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-cyan-500/30"
-            placeholder="ton@email.com"
-            autoComplete="email"
-            required
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
           />
-        </label>
-      </div>
 
-      <label className="mt-5 block">
-        <span className="mb-2 block text-sm text-slate-400">Sujet (optionnel)</span>
-        <input
-          name="subject"
-          value={form.subject}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-800/50 bg-slate-950/50 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-cyan-500/30"
-          placeholder="Sujet de ton message"
-          autoComplete="off"
-        />
-      </label>
+          {status.type !== "idle" && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Card
+                hover={false}
+                className={
+                  status.type === "success"
+                    ? "border-green-500/25 bg-green-500/10"
+                    : "border-red-500/25 bg-red-500/10"
+                }
+              >
+                <div className="flex items-start gap-3">
+                  {status.type === "success" ? (
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
+                  ) : (
+                    <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-400" />
+                  )}
+                  <p className={`text-sm ${status.type === "success" ? "text-green-200" : "text-red-200"}`}>
+                    {status.message}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
+          )}
 
-      <label className="mt-5 block">
-        <span className="mb-2 block text-sm text-slate-400">Message</span>
-        <textarea
-          name="message"
-          value={form.message}
-          onChange={handleChange}
-          rows={6}
-          className="w-full resize-none rounded-xl border border-slate-800/50 bg-slate-950/50 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-cyan-500/30"
-          placeholder="Parle-moi de ton besoin..."
-          required
-        />
-      </label>
-
-      <input
-        type="text"
-        name="honeypot"
-        value={form.honeypot}
-        onChange={handleChange}
-        className="hidden"
-        tabIndex={-1}
-        autoComplete="off"
-      />
-
-      {status.type !== "idle" && (
-        <div
-          className={`mt-6 rounded-xl border px-4 py-3 text-sm ${
-            status.type === "success"
-              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
-              : "border-red-500/30 bg-red-500/10 text-red-200"
-          }`}
-        >
-          {status.message}
-        </div>
-      )}
-
-      <div className="mt-8 flex items-center justify-between gap-4">
-        <p className="font-mono text-xs text-slate-500">Réponse en 24h à 72h en moyenne</p>
-        <button
-          type="submit"
-          disabled={submitting}
-          className="btn-subtle rounded-xl px-6 py-3 font-medium text-slate-100 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {submitting ? "Envoi en cours..." : "Envoyer le message"}
-        </button>
-      </div>
-    </motion.form>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs text-slate-500">Réponse en 24h à 72h en moyenne</p>
+            <Button type="submit" variant="primary" disabled={submitting} className="gap-2">
+              {submitting ? (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Send size={16} />
+                  </motion.div>
+                  Envoi en cours...
+                </>
+              ) : (
+                <>
+                  <Send size={16} />
+                  Envoyer le message
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
+      </Card>
+    </motion.div>
   );
 }

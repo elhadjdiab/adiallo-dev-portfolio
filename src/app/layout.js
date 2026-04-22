@@ -7,6 +7,9 @@ import { store } from "@/store";
 import SiteNav from "@/components/SiteNav";
 import MainShell from "@/components/MainShell";
 import AuthHydrate from "@/components/AuthHydrate";
+import ThemeProvider from "@/components/ThemeProvider";
+import ScrollToTop from "@/components/ScrollToTop";
+import { ToastProvider } from "@/components/ui/Toast";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,12 +24,15 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={`${inter.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#030712] font-sans text-slate-100">
-        <div className="mesh-background" aria-hidden />
-        <SiteNav />
+      <body className="min-h-full flex flex-col bg-[var(--bg-primary)] font-sans text-[var(--text-primary)] transition-colors duration-300">
         <Provider store={store}>
-          <AuthHydrate />
-          <MainShell>{children}</MainShell>
+          <ToastProvider>
+            <ThemeProvider />
+            <SiteNav />
+            <AuthHydrate />
+            <ScrollToTop />
+            <MainShell>{children}</MainShell>
+          </ToastProvider>
         </Provider>
       </body>
     </html>

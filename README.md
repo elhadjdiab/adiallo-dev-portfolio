@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio - Abdoulaye Diallo
 
-## Getting Started
+Portfolio Full-Stack Developer avec design minimaliste moderne.
 
-First, run the development server:
+## 🚀 Stack Technique
+
+- **Framework**: Next.js 16.2.2 (App Router)
+- **UI**: React 19.2.4
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion 12.38.0
+- **State**: Redux Toolkit 2.11.2
+- **Database**: SQLite + Prisma 6.19.3
+- **Auth**: JWT + bcryptjs
+- **Icons**: Lucide React
+
+## 📦 Installation
 
 ```bash
+# Installer les dépendances
+npm install
+
+# Configurer la base de données
+cd src/config
+npm install
+npx prisma generate
+npx prisma migrate dev
+
+# Retour à la racine
+cd ../..
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🎨 Design System
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Le projet utilise un design system minimaliste avec:
 
-## Learn More
+- **Palette**: Background `#0B0F14`, Surface `#111827`, Primary `#6366F1`
+- **Composants UI**: Button, Card, Badge, Input, Textarea, Container
+- **Animations**: 400ms max, easeOut, respect de `prefers-reduced-motion`
+- **Layout**: Mobile-first, responsive
 
-To learn more about Next.js, take a look at the following resources:
+Voir `DESIGN_SYSTEM.md` pour la documentation complète (local uniquement).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                    # Pages Next.js (App Router)
+│   ├── (auth)/            # Routes auth (login, register)
+│   ├── admin/             # Dashboard admin
+│   │   ├── projects/      # CRUD projets
+│   │   └── testimonials/  # Modération témoignages
+│   ├── projects/          # Liste et détails projets
+│   │   └── [id]/testimonial/  # Formulaire témoignage
+│   ├── testimonials/      # Témoignages publics
+│   ├── about/             # Page à propos
+│   ├── contact/           # Formulaire contact
+│   └── api/               # API routes
+│       ├── auth/          # Login, register
+│       ├── projects/      # CRUD projets
+│       ├── testimonials/  # CRUD témoignages
+│       ├── contact/       # Messages contact
+│       └── upload/        # Upload images
+├── components/            # Composants React
+│   └── ui/               # Composants UI réutilisables
+├── lib/                   # Utilitaires et helpers
+│   └── messages.js       # Messages centralisés
+├── store/                 # Redux store
+└── styles/               # CSS global
+```
 
-## Deploy on Vercel
+## 🔑 Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ Pages: Home, Projects, About, Testimonials, Contact
+- ✅ Auth: Login, Register (JWT)
+- ✅ Admin: Dashboard protégé avec CRUD complet
+- ✅ Projects: Upload d'images, gestion complète
+- ✅ Testimonials: Système de modération (pending/approved/rejected)
+- ✅ API: REST endpoints (projects, testimonials, contact, upload)
+- ✅ Database: Prisma + SQLite
+- ✅ Responsive: Mobile-first avec menu hamburger
+- ✅ Animations: Framer Motion optimisées
+- ✅ Accessibilité: aria-labels, alt texts descriptifs
+- ✅ SEO: Metadata sur toutes les pages
+- ✅ Toast notifications: Système de notifications élégant
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Scripts
+
+```bash
+npm run dev      # Développement
+npm run build    # Build production
+npm run start    # Serveur production
+npm run lint     # ESLint
+```
+
+## 📝 Variables d'environnement
+
+Créer `.env` à la racine:
+
+```env
+DATABASE_URL="file:./src/config/dev.db"
+JWT_SECRET="your-secret-key"
+```
+
+## 🎯 Composants UI
+
+```jsx
+import { Button, Card, Badge, Input, Container, Toast } from "@/components/ui";
+
+// Button
+<Button variant="primary|secondary|ghost" size="sm|md|lg">
+  Click me
+</Button>
+
+// Card
+<Card hover={true}>
+  Content
+</Card>
+
+// Badge
+<Badge variant="default|primary|success|error">
+  Label
+</Badge>
+
+// Input
+<Input label="Email" error="Error message" />
+
+// Container
+<Container size="sm|md|lg|xl">
+  Content
+</Container>
+
+// Toast (via hook)
+import { useToast } from "@/components/ui/Toast";
+
+const { toast } = useToast();
+toast.success("Message de succès");
+toast.error("Message d'erreur");
+toast.warning("Avertissement");
+toast.info("Information");
+```
+
+## 🚀 Déploiement
+
+Le projet est optimisé pour Vercel:
+
+```bash
+npm run build
+```
+
+Ou déployer directement sur [Vercel](https://vercel.com).
+
+## 📄 License
+
+MIT
+
+## 👤 Auteur
+
+**Abdoulaye Diallo**
+- Portfolio: [adiallo.dev](https://adiallo.dev)
+- GitHub: [@abdoulayediallo](https://github.com/elhadjdiab)

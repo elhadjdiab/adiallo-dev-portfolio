@@ -45,3 +45,17 @@ next-env.d.ts
 # Configuration IA (Local uniquement)
 AGENTS.md
 CLAUDE.md
+
+# Documentation de refonte (Local uniquement)
+REDESIGN_PLAN.md
+DESIGN_SYSTEM.md
+PHASE_*.md
+
+# Tous les fichiers .md sauf README.md
+*.md
+!README.md
+
+# Uploads (images uploadées)
+/public/uploads/*
+!/public/uploads/.gitkeep
+!/public/uploads/projects/.gitkeep

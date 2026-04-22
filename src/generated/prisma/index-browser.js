@@ -123,6 +123,7 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   name: 'name',
+  role: 'role',
   createdAt: 'createdAt'
 };
 
@@ -149,9 +150,11 @@ exports.Prisma.ProjectTechnologyScalarFieldEnum = {
 exports.Prisma.TestimonialScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  projectId: 'projectId'
 };
 
 exports.Prisma.ContactMessageScalarFieldEnum = {

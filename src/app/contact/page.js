@@ -1,11 +1,14 @@
+"use client";
+
 import ContactForm from "@/components/ContactForm";
+import Container from "@/components/ui/Container";
 
 export default function ContactPage() {
   return (
-    <main className="bg-slate-950 px-4 pb-28 pt-12 sm:px-8 sm:pb-32 sm:pt-16">
-      <section className="mx-auto w-full max-w-3xl">
+    <main className="min-h-screen bg-[#0B0F14] pb-24 pt-32">
+      <Container size="md">
         <ContactForm />
-      </section>
+      </Container>
     </main>
   );
 }

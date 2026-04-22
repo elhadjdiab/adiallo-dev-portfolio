@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
-import { getTokenFromRequest, verifyToken } from "@/lib/auth";
-
-function getAuthUser(request) {
-  const token = getTokenFromRequest(request);
-  if (!token) return null;
-  return verifyToken(token);
-}
+import { requireAdmin } from "@/lib/auth";
+import { ERROR_MESSAGES } from "@/lib/messages";
 
 function normalizeTechnologies(technologies) {
   if (!Array.isArray(technologies)) return [];
@@ -35,8 +30,9 @@ export async function GET() {
 
     return NextResponse.json(formatted);
   } catch (error) {
+    console.error("Error fetching projects:", error);
     return NextResponse.json(
-      { error: "Impossible de recuperer les projets." },
+      { error: ERROR_MESSAGES.PROJECTS_FETCH_ERROR, details: error.message },
       { status: 500 }
     );
   }
@@ -44,9 +40,9 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const authUser = getAuthUser(request);
-    if (!authUser) {
-      return NextResponse.json({ error: "Non autorise." }, { status: 401 });
+    const authCheck = await requireAdmin(request);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
     }
 
     const { title, description, imageUrl, githubUrl, liveUrl, technologies } =
@@ -54,7 +50,7 @@ export async function POST(request) {
 
     if (!title || !description) {
       return NextResponse.json(
-        { error: "Le titre et la description sont obligatoires." },
+        { error: ERROR_MESSAGES.PROJECT_TITLE_REQUIRED },
         { status: 400 }
       );
     }
@@ -96,8 +92,9 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
+    console.error("Error creating project:", error);
     return NextResponse.json(
-      { error: "Impossible de creer le projet." },
+      { error: ERROR_MESSAGES.PROJECT_CREATE_ERROR, details: error.message },
       { status: 500 }
     );
   }

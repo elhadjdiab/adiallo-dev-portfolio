@@ -13,6 +13,7 @@ model User {
   email        String        @unique
   password     String
   name         String?
+  role         String        @default("user") // user, admin
   createdAt    DateTime      @default(now())
   testimonials Testimonial[]
 }
@@ -26,6 +27,7 @@ model Project {
   liveUrl      String?
   createdAt    DateTime             @default(now())
   technologies ProjectTechnology[]
+  testimonials Testimonial[]
 }
 
 model Technology {
@@ -46,10 +48,13 @@ model ProjectTechnology {
 model Testimonial {
   id        Int      @id @default(autoincrement())
   content   String
+  status    String   @default("pending") // pending, approved, rejected
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
+  projectId Int
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model ContactMessage {
