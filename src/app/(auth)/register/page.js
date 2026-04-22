@@ -33,7 +33,7 @@ export default function RegisterPage() {
 
   // Get redirect URL from query params
   const searchParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
-  const redirectUrl = searchParams?.get("redirect") || "/admin";
+  const redirectUrl = searchParams?.get("redirect") || "/";
 
   function validate() {
     const next = {};
@@ -146,7 +146,7 @@ export default function RegisterPage() {
         <p className="mt-8 text-center text-sm text-slate-400">
           Déjà inscrit ?{" "}
           <Link 
-            href={redirectUrl !== "/admin" ? `/login?redirect=${encodeURIComponent(redirectUrl)}` : "/login"}
+            href={redirectUrl !== "/" ? `/login?redirect=${encodeURIComponent(redirectUrl)}` : "/login"}
             className="font-medium text-indigo-400 hover:text-indigo-300"
           >
             Se connecter
