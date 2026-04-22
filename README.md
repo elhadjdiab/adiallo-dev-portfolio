@@ -95,41 +95,6 @@ npm run dev
 
 Ouvrir [http://localhost:3000](http://localhost:3000)
 
-## 🔑 Variables d'environnement
-
-Créer un fichier `.env` à la racine du projet :
-
-```env
-# Base de données
-DATABASE_URL="file:./dev.db"
-
-# JWT Secret (générer une clé sécurisée)
-JWT_SECRET="votre-cle-secrete-tres-longue-et-aleatoire"
-
-# URL de l'API (optionnel)
-NEXT_PUBLIC_API_URL="http://localhost:3000/api"
-```
-
-## 👤 Compte administrateur
-
-Par défaut, un compte admin est créé avec :
-- **Email**: admin@exemple.com
-- **Mot de passe**: admin123
-
-⚠️ **Important**: Changez ce mot de passe après la première connexion !
-
-### Scripts utilitaires
-
-```bash
-# Créer un utilisateur admin
-node set-admin-root.js
-
-# Lister tous les utilisateurs
-node src/config/list-users.js
-
-# Mettre un utilisateur existant en admin
-node src/config/set-admin.js
-```
 
 ## 📁 Structure du projet
 
