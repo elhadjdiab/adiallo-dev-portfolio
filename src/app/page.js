@@ -69,10 +69,9 @@ export default function Home() {
               De l'idée au déploiement, je transforme vos projets en réalité.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4" style={{ pointerEvents: 'auto' }}>
+            <div className="flex flex-wrap justify-center gap-4">
               <a 
                 href="/projects"
-                style={{ pointerEvents: 'auto' }}
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-indigo-500 active:scale-95 cursor-pointer"
               >
                 <Rocket size={20} />
@@ -80,7 +79,6 @@ export default function Home() {
               </a>
               <a 
                 href="/contact"
-                style={{ pointerEvents: 'auto' }}
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-base font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/50 active:scale-95 cursor-pointer"
               >
                 <Mail size={20} />
@@ -89,13 +87,12 @@ export default function Home() {
             </div>
 
             {/* Social Links */}
-            <div className="mt-8 flex justify-center gap-4" style={{ pointerEvents: 'auto' }}>
+            <div className="mt-8 flex justify-center gap-4">
               <a
                 href="https://github.com/elhadjdiab"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Voir mon profil GitHub"
-                style={{ pointerEvents: 'auto' }}
                 className="text-slate-500 transition-colors hover:text-slate-300"
               >
                 <svg
@@ -118,7 +115,6 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Voir mon profil LinkedIn"
-                style={{ pointerEvents: 'auto' }}
                 className="text-slate-500 transition-colors hover:text-slate-300"
               >
                 <Linkedin size={24} />
