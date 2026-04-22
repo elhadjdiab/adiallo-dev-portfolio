@@ -9,7 +9,7 @@ Portfolio professionnel Full-Stack Developer avec design moderne, système de th
 
 ## ✨ Fonctionnalités principales
 
-### 🎨 Interface utilisateur
+###  Interface utilisateur
 - ✅ **Design moderne** avec animations Framer Motion
 - ✅ **Thème clair/sombre** avec bascule animée et sauvegarde de préférence
 - ✅ **Responsive** mobile-first avec menu hamburger
@@ -17,27 +17,27 @@ Portfolio professionnel Full-Stack Developer avec design moderne, système de th
 - ✅ **Toast notifications** élégantes pour tous les retours utilisateur
 - ✅ **Empty states** engageants avec appels à l'action
 
-### 🔐 Authentification et sécurité
+###  Authentification et sécurité
 - ✅ **Système de rôles** (user/admin) avec JWT
 - ✅ **Protection des routes** côté client et serveur
 - ✅ **Validation** des données côté client et serveur
 - ✅ **Hashage des mots de passe** avec bcryptjs
 
-### 👨‍💼 Interface d'administration
+###  Interface d'administration
 - ✅ **Dashboard admin** avec statistiques
 - ✅ **Gestion des projets** (CRUD complet avec upload d'images)
 - ✅ **Modération des témoignages** (pending/approved/rejected)
 - ✅ **Gestion des messages** de contact (lu/non lu, répondre, supprimer)
 - ✅ **Accès restreint** aux administrateurs uniquement
 
-### 📱 Pages publiques
+###  Pages publiques
 - ✅ **Page d'accueil** avec hero, stats, stack technique, projets récents
 - ✅ **Portfolio de projets** avec filtres et détails
 - ✅ **Témoignages** groupés par projet
 - ✅ **Formulaire de contact** avec protection anti-spam
 - ✅ **Page À propos** avec liens sociaux
 
-## �️ Stack Technique
+##  Stack Technique
 
 ### Frontend
 - **Framework**: Next.js 16.2.2 (App Router)
@@ -59,7 +59,7 @@ Portfolio professionnel Full-Stack Developer avec design moderne, système de th
 - **Deployment**: Vercel-ready
 - **Environment**: Node.js
 
-## 📦 Installation
+##  Installation
 
 ### Prérequis
 - Node.js 18+ 
@@ -170,7 +170,7 @@ adiallo-dev-portfolio/
 └── README.md                    # Ce fichier
 ```
 
-## 🎨 Design System
+##  Design System
 
 ### Palette de couleurs
 
@@ -228,7 +228,7 @@ toast.warning("Attention");
 toast.info("Information");
 ```
 
-## 🚀 Scripts disponibles
+##  Scripts disponibles
 
 ```bash
 # Développement
@@ -248,7 +248,7 @@ npx prisma generate      # Générer le client Prisma
 npx prisma migrate dev   # Créer une nouvelle migration
 ```
 
-## 🔒 Sécurité
+##  Sécurité
 
 ### Authentification
 - JWT avec expiration de 7 jours
@@ -268,7 +268,7 @@ npx prisma migrate dev   # Créer une nouvelle migration
 - Rate limiting recommandé en production
 - HTTPS obligatoire en production
 
-## 📱 Responsive Design
+##  Responsive Design
 
 Le site est entièrement responsive avec des breakpoints :
 - **Mobile**: < 768px
@@ -281,7 +281,7 @@ Fonctionnalités mobiles :
 - Scroll to top pour navigation rapide
 - Images optimisées avec Next.js Image
 
-## ♿ Accessibilité
+##  Accessibilité
 
 - ✅ Contraste WCAG AA minimum
 - ✅ Navigation au clavier
@@ -290,7 +290,7 @@ Fonctionnalités mobiles :
 - ✅ Focus visible sur les éléments interactifs
 - ✅ Respect de `prefers-reduced-motion`
 
-## 🚀 Déploiement
+##  Déploiement
 
 ### Vercel (recommandé)
 
@@ -314,7 +314,7 @@ Variables d'environnement requises :
 - `JWT_SECRET`
 - `NEXT_PUBLIC_API_URL` (optionnel)
 
-## 🤝 Contribution
+##  Contribution
 
 Les contributions sont les bienvenues ! Pour contribuer :
 
@@ -324,7 +324,7 @@ Les contributions sont les bienvenues ! Pour contribuer :
 4. Push vers la branche (`git push origin feature/AmazingFeature`)
 5. Ouvrir une Pull Request
 
-## 📝 Changelog
+##  Changelog
 
 ### Version 2.0.0 (2026-04-21)
 - ✨ Système de thème clair/sombre complet
@@ -336,18 +336,18 @@ Les contributions sont les bienvenues ! Pour contribuer :
 - 📝 Documentation complète
 
 ### Version 1.0.0 (2026-04-08)
-- 🎉 Version initiale
+-  Version initiale
 - ✨ Pages publiques (home, projects, about, contact, testimonials)
 - ✨ Authentification (login, register)
 - ✨ Interface admin (projects, testimonials)
 - ✨ API REST complète
 - ✨ Design system avec Tailwind CSS
 
-## 📄 License
+##  License
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
-## 👤 Auteur
+##  Auteur
 
 **Abdoulaye Diallo**
 - Portfolio: [adiallo.dev](https://adiallo.dev)
