@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
-import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { getTokenFromRequest, getUserFromToken } from "@/lib/auth";
 import { ERROR_MESSAGES } from "@/lib/messages";
-
-function getAuthUser(request) {
-  const token = getTokenFromRequest(request);
-  if (!token) return null;
-  return verifyToken(token);
-}
 
 export async function GET() {
   try {
@@ -39,7 +33,12 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const authUser = getAuthUser(request);
+    const token = getTokenFromRequest(request);
+    if (!token) {
+      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
+    }
+
+    const authUser = await getUserFromToken(token);
     if (!authUser) {
       return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
     }
