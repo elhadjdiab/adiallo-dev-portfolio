@@ -389,14 +389,14 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 - GitHub: [@elhadjdiab](https://github.com/elhadjdiab)
 - LinkedIn: [Abdoulaye Diallo](https://linkedin.com/in/abdoulaye-diallo)
 
-## 🙏 Remerciements
+## technologies
 
 - [Next.js](https://nextjs.org/) - Framework React
 - [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
 - [Framer Motion](https://www.framer.com/motion/) - Animations
 - [Prisma](https://www.prisma.io/) - ORM
 - [Lucide](https://lucide.dev/) - Icônes
-- [Vercel](https://vercel.com/) - Hébergement
+- [Vercel](https://vercel.com/) - Hébergement ( prochainement)
 
 ---
 
