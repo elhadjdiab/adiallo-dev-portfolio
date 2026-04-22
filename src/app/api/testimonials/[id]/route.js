@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
-import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { requireAdmin } from "@/lib/auth";
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/lib/messages";
-
-function getAuthUser(request) {
-  const token = getTokenFromRequest(request);
-  if (!token) return null;
-  return verifyToken(token);
-}
 
 // GET - Récupérer un témoignage spécifique
 export async function GET(request, { params }) {
@@ -42,9 +36,9 @@ export async function GET(request, { params }) {
 // PATCH - Changer le status (approuver/rejeter)
 export async function PATCH(request, { params }) {
   try {
-    const authUser = getAuthUser(request);
-    if (!authUser) {
-      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
+    const authCheck = await requireAdmin(request);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
     }
 
     const { id } = await params;
@@ -80,9 +74,9 @@ export async function PATCH(request, { params }) {
 // PUT - Modifier le contenu
 export async function PUT(request, { params }) {
   try {
-    const authUser = getAuthUser(request);
-    if (!authUser) {
-      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
+    const authCheck = await requireAdmin(request);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
     }
 
     const { id } = await params;
@@ -141,9 +135,9 @@ export async function PUT(request, { params }) {
 // DELETE - Supprimer un témoignage
 export async function DELETE(request, { params }) {
   try {
-    const authUser = getAuthUser(request);
-    if (!authUser) {
-      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
+    const authCheck = await requireAdmin(request);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
     }
 
     const { id } = await params;

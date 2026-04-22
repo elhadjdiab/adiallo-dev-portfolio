@@ -1,17 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
-import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { requireAdmin } from "@/lib/auth";
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/lib/messages";
 
 function parseId(id) {
   const parsed = Number(id);
   return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
-}
-
-function getAuthUser(request) {
-  const token = getTokenFromRequest(request);
-  if (!token) return null;
-  return verifyToken(token);
 }
 
 function normalizeTechnologies(technologies) {
@@ -59,9 +53,9 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const authUser = getAuthUser(request);
-    if (!authUser) {
-      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
+    const authCheck = await requireAdmin(request);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
     }
 
     const { id } = await params;
@@ -141,9 +135,9 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const authUser = getAuthUser(request);
-    if (!authUser) {
-      return NextResponse.json({ error: ERROR_MESSAGES.UNAUTHORIZED }, { status: 401 });
+    const authCheck = await requireAdmin(request);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
     }
 
     const { id } = await params;

@@ -1,26 +1,51 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
+import prisma from "@/lib/prisma";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
-export function signToken(payload) {
-  if (!JWT_SECRET || String(JWT_SECRET).length < 8) {
-    throw new Error(
-      "JWT_SECRET manquant ou trop court. Définis-le dans .env (ex. 32 caractères aléatoires)."
-    );
-  }
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
-}
+const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
 
 export function verifyToken(token) {
   try {
     return jwt.verify(token, JWT_SECRET);
-  } catch {
+  } catch (error) {
     return null;
   }
 }
 
-export function getTokenFromRequest(request) {
-  const authHeader = request.headers.get('authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
-  return authHeader.split(' ')[1];
+export async function getUserFromToken(token) {
+  const decoded = verifyToken(token);
+  if (!decoded) return null;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+      select: { id: true, email: true, name: true, role: true },
+    });
+    return user;
+  } catch (error) {
+    return null;
+  }
+}
+
+export function isAdmin(user) {
+  return user && user.role === "admin";
+}
+
+export async function requireAdmin(request) {
+  const authHeader = request.headers.get("authorization");
+  if (!authHeader) {
+    return { error: "Non autorisé", status: 401 };
+  }
+
+  const token = authHeader.replace("Bearer ", "");
+  const user = await getUserFromToken(token);
+
+  if (!user) {
+    return { error: "Token invalide", status: 401 };
+  }
+
+  if (!isAdmin(user)) {
+    return { error: "Accès admin requis", status: 403 };
+  }
+
+  return { user };
 }

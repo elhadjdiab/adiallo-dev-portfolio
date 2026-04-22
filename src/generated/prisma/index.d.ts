@@ -1442,6 +1442,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     name: string | null
+    role: string | null
     createdAt: Date | null
   }
 
@@ -1450,6 +1451,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     name: string | null
+    role: string | null
     createdAt: Date | null
   }
 
@@ -1458,6 +1460,7 @@ export namespace Prisma {
     email: number
     password: number
     name: number
+    role: number
     createdAt: number
     _all: number
   }
@@ -1476,6 +1479,7 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    role?: true
     createdAt?: true
   }
 
@@ -1484,6 +1488,7 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    role?: true
     createdAt?: true
   }
 
@@ -1492,6 +1497,7 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    role?: true
     createdAt?: true
     _all?: true
   }
@@ -1587,6 +1593,7 @@ export namespace Prisma {
     email: string
     password: string
     name: string | null
+    role: string
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -1614,6 +1621,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
     createdAt?: boolean
     testimonials?: boolean | User$testimonialsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1624,6 +1632,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1632,6 +1641,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1640,10 +1650,11 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    role?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "role" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testimonials?: boolean | User$testimonialsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1661,6 +1672,7 @@ export namespace Prisma {
       email: string
       password: string
       name: string | null
+      role: string
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2090,6 +2102,7 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -8002,6 +8015,7 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     name: 'name',
+    role: 'role',
     createdAt: 'createdAt'
   };
 
@@ -8130,6 +8144,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     name?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     testimonials?: TestimonialListRelationFilter
   }
@@ -8139,6 +8154,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     testimonials?: TestimonialOrderByRelationAggregateInput
   }
@@ -8151,6 +8167,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     name?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     testimonials?: TestimonialListRelationFilter
   }, "id" | "email">
@@ -8160,6 +8177,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -8176,6 +8194,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -8475,6 +8494,7 @@ export namespace Prisma {
     email: string
     password: string
     name?: string | null
+    role?: string
     createdAt?: Date | string
     testimonials?: TestimonialCreateNestedManyWithoutUserInput
   }
@@ -8484,6 +8504,7 @@ export namespace Prisma {
     email: string
     password: string
     name?: string | null
+    role?: string
     createdAt?: Date | string
     testimonials?: TestimonialUncheckedCreateNestedManyWithoutUserInput
   }
@@ -8492,6 +8513,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     testimonials?: TestimonialUpdateManyWithoutUserNestedInput
   }
@@ -8501,6 +8523,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     testimonials?: TestimonialUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -8510,6 +8533,7 @@ export namespace Prisma {
     email: string
     password: string
     name?: string | null
+    role?: string
     createdAt?: Date | string
   }
 
@@ -8517,6 +8541,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8525,6 +8550,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8875,6 +8901,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -8887,6 +8914,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -8895,6 +8923,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9839,6 +9868,7 @@ export namespace Prisma {
     email: string
     password: string
     name?: string | null
+    role?: string
     createdAt?: Date | string
   }
 
@@ -9847,6 +9877,7 @@ export namespace Prisma {
     email: string
     password: string
     name?: string | null
+    role?: string
     createdAt?: Date | string
   }
 
@@ -9896,6 +9927,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9904,6 +9936,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

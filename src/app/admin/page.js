@@ -53,6 +53,9 @@ export default function AdminPage() {
     dispatch(logout());
   }
 
+  // Vérifier si l'utilisateur est admin
+  const isAdmin = user && user.role === 'admin';
+
   if (!isAuthenticated || !user) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center bg-[#0B0F14] px-6">
@@ -66,6 +69,31 @@ export default function AdminPage() {
             <Button href="/login" variant="primary" className="w-full">
               Se connecter
             </Button>
+          </Card>
+        </motion.div>
+      </main>
+    );
+  }
+
+  // Si connecté mais pas admin
+  if (!isAdmin) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#0B0F14] px-6">
+        <motion.div {...fadeIn} className="text-center">
+          <Card hover={false} className="max-w-md border-red-500/20 bg-red-500/5">
+            <LayoutDashboard className="mx-auto mb-4 h-12 w-12 text-red-500" />
+            <h1 className="mb-2 text-xl font-bold text-slate-100">Accès refusé</h1>
+            <p className="mb-6 text-sm text-slate-400">
+              Cette zone est réservée aux administrateurs.
+            </p>
+            <div className="flex gap-3">
+              <Button href="/" variant="secondary" className="flex-1">
+                Retour au site
+              </Button>
+              <Button onClick={handleLogout} variant="ghost" className="flex-1">
+                Déconnexion
+              </Button>
+            </div>
           </Card>
         </motion.div>
       </main>
