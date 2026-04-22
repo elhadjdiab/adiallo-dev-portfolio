@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { requireAdmin } from "@/lib/auth";
 
 export async function PATCH(req, { params }) {
   try {
-    const { id } = params;
+    const authCheck = await requireAdmin(req);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
+    }
+
+    const { id } = await params;
     const body = await req.json();
     
     const updated = await prisma.contactMessage.update({
@@ -19,7 +25,12 @@ export async function PATCH(req, { params }) {
 
 export async function DELETE(req, { params }) {
   try {
-    const { id } = params;
+    const authCheck = await requireAdmin(req);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
+    }
+
+    const { id } = await params;
     await prisma.contactMessage.delete({
       where: { id: parseInt(id) }
     });

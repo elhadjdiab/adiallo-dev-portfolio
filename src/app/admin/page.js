@@ -40,7 +40,7 @@ const adminSections = [
     description: "Consulter les messages de contact",
     icon: Mail,
     href: "/admin/messages",
-    badge: "À venir",
+    badge: null,
   },
 ];
 
@@ -157,7 +157,6 @@ export default function AdminPage() {
                     variant="secondary"
                     size="sm"
                     className="w-full"
-                    disabled={section.badge === "À venir"}
                   >
                     Accéder
                   </Button>

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { requireAdmin } from "@/lib/auth";
 
 export async function POST(req) {
   try {
@@ -32,9 +33,14 @@ export async function POST(req) {
   }
 }
 
-// GET Protégé pour lister les messages
+// GET Protégé pour lister les messages (admin uniquement)
 export async function GET(req) {
   try {
+    const authCheck = await requireAdmin(req);
+    if (authCheck.error) {
+      return NextResponse.json({ error: authCheck.error }, { status: authCheck.status });
+    }
+
     const messages = await prisma.contactMessage.findMany({
       orderBy: { createdAt: 'desc' }
     });
