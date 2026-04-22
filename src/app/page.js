@@ -48,7 +48,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#0B0F14]">
       {/* Hero Section */}
       <section className="relative overflow-hidden pb-24 pt-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent" />
         <Container size="lg">
           <div className="text-center">
             <Badge variant="primary" className="mb-6">
